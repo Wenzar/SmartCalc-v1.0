@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>864</width>
-    <height>461</height>
+    <width>254</width>
+    <height>363</height>
    </rect>
   </property>
   <property name="tabletTracking">
@@ -335,6 +335,12 @@
       <height>60</height>
      </rect>
     </property>
+    <property name="minimumSize">
+     <size>
+      <width>251</width>
+      <height>0</height>
+     </size>
+    </property>
     <property name="styleSheet">
      <string notr="true">QLabel {
 	qproperty-alignment: 'AlignVCenter | AlignRight';
@@ -468,7 +474,7 @@ background-color : white;</string>
      <rect>
       <x>200</x>
       <y>60</y>
-      <width>50</width>
+      <width>51</width>
       <height>51</height>
      </rect>
     </property>
