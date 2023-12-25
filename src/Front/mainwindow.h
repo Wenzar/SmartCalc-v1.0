@@ -27,9 +27,9 @@ private slots:
     void on_pushButton_dot_clicked();
     void operations();
     void on_pushButton_AC_clicked();
-    // void on_pushButton_result_clicked();
-    void math_operations();
     void function_button();
     void on_Trigonometry_activated(int index);
+    void on_pushButton_result_clicked();
+    char *get_input_array();
 };
 #endif // MAINWINDOW_H

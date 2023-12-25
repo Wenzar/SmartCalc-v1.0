@@ -73,14 +73,9 @@ void MainWindow::operations()
 
 }
 
-void MainWindow::math_operations()
-{
-    num_first = ui->result_show->text().toDouble();
-}
-
 void MainWindow::on_pushButton_AC_clicked()
 {
-    ui->result_show->setText("");
+    ui->result_show->clear();
 }
 
 void MainWindow::on_Trigonometry_activated(int index)
@@ -111,3 +106,24 @@ void MainWindow::on_Trigonometry_activated(int index)
     }
 }
 
+
+void MainWindow::on_pushButton_result_clicked()
+{
+    ui->result_show->clear();
+    char *input_array = get_input_array();
+}
+
+char *MainWindow::get_input_array() {
+    QString text = ui->result_show->text();
+    size_t size = text.size();
+    char *input_array = nullptr;
+    if (size > 0) {
+        input_array = (char *)calloc(size + 1, sizeof(char));
+        // std::string convert = text.toStdString();
+        for (size_t i = 0; i < size; i++) {
+          input_array[i] = text[i];
+        }
+        input_array[size] = '\0';
+    }
+    return input_array;
+}
