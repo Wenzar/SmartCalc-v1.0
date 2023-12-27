@@ -52,9 +52,11 @@ OBJECTS_DIR   = ./
 
 ####### Files
 
-SOURCES       = ../Front/main.cpp \
+SOURCES       = ../Back/validation.c \
+		../Front/main.cpp \
 		../Front/mainwindow.cpp moc_mainwindow.cpp
-OBJECTS       = main.o \
+OBJECTS       = validation.o \
+		main.o \
 		mainwindow.o \
 		moc_mainwindow.o
 DIST          = /usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/spec_pre.prf \
@@ -195,6 +197,7 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/spec_pre.prf \
 		/usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/qt_config.prf \
 		/usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-clang/qmake.conf \
 		/usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/spec_post.prf \
+		../Front/.qmake.stash \
 		/usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/exclusive_builds.prf \
 		/usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/toolchain.prf \
 		/usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/default_pre.prf \
@@ -215,7 +218,10 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/spec_pre.prf \
 		/usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/exceptions.prf \
 		/usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/yacc.prf \
 		/usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/lex.prf \
-		../Front/SmartCalc.pro ../Front/mainwindow.h ../Front/main.cpp \
+		../Front/SmartCalc.pro ../Back/general.h \
+		../Back/validation.h \
+		../Front/mainwindow.h ../Back/validation.c \
+		../Front/main.cpp \
 		../Front/mainwindow.cpp
 QMAKE_TARGET  = SmartCalc
 DESTDIR       = 
@@ -366,6 +372,7 @@ Makefile: ../Front/SmartCalc.pro /usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-cla
 		/usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/qt_config.prf \
 		/usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-clang/qmake.conf \
 		/usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/spec_post.prf \
+		.qmake.stash \
 		/usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/exclusive_builds.prf \
 		/usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/toolchain.prf \
 		/usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/default_pre.prf \
@@ -529,6 +536,7 @@ Makefile: ../Front/SmartCalc.pro /usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-cla
 /usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/qt_config.prf:
 /usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-clang/qmake.conf:
 /usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/spec_post.prf:
+.qmake.stash:
 /usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/exclusive_builds.prf:
 /usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/toolchain.prf:
 /usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/default_pre.prf:
@@ -568,8 +576,8 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents /usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../Front/mainwindow.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../Front/main.cpp ../Front/mainwindow.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../Back/general.h ../Back/validation.h ../Front/mainwindow.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../Back/validation.c ../Front/main.cpp ../Front/mainwindow.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents ../Front/mainwindow.ui $(DISTDIR)/
 
 
@@ -606,6 +614,8 @@ compiler_moc_header_make_all: moc_mainwindow.cpp
 compiler_moc_header_clean:
 	-$(DEL_FILE) moc_mainwindow.cpp
 moc_mainwindow.cpp: ../Front/mainwindow.h \
+		../Back/general.h \
+		../Back/validation.h \
 		moc_predefs.h \
 		/usr/lib/qt6/libexec/moc
 	/usr/lib/qt6/libexec/moc $(DEFINES) --include /home/vboxuser/Desktop/Projects/C7_SmartCalc_v1.0-1/src/build-SmartCalc-Desktop-Debug/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-clang -I/home/vboxuser/Desktop/Projects/C7_SmartCalc_v1.0-1/src/Front -I/usr/include/x86_64-linux-gnu/qt6 -I/usr/include/x86_64-linux-gnu/qt6/QtWidgets -I/usr/include/x86_64-linux-gnu/qt6/QtGui -I/usr/include/x86_64-linux-gnu/qt6/QtCore -I. -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -I/usr/include/c++/11/backward -I/usr/lib/llvm-14/lib/clang/14.0.0/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../Front/mainwindow.h -o moc_mainwindow.cpp
@@ -631,10 +641,18 @@ compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean compiler_ui
 
 ####### Compile
 
-main.o: ../Front/main.cpp ../Front/mainwindow.h
+validation.o: ../Back/validation.c ../Back/validation.h \
+		../Back/general.h
+	$(CC) -c $(CFLAGS) $(INCPATH) -o validation.o ../Back/validation.c
+
+main.o: ../Front/main.cpp ../Front/mainwindow.h \
+		../Back/general.h \
+		../Back/validation.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../Front/main.cpp
 
 mainwindow.o: ../Front/mainwindow.cpp ../Front/mainwindow.h \
+		../Back/general.h \
+		../Back/validation.h \
 		ui_mainwindow.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwindow.o ../Front/mainwindow.cpp
 

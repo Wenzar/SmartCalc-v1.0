@@ -3,7 +3,10 @@
 
 #include <QMainWindow>
 
-
+extern "C" {
+#include "../Back/general.h"
+#include "../Back/validation.h"
+}
 
 QT_BEGIN_NAMESPACE
 namespace Ui {

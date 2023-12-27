@@ -1,0 +1,7 @@
+#include "general.h"
+
+#ifndef REVERSE_POLISH_NOTATION_H_
+#define REVERSE_POLISH_NOTATION_H_
+
+
+#endif  // REVERSE_POLISH_NOTATION_H_
