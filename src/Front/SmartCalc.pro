@@ -10,12 +10,17 @@ CONFIG += c++17
 
 SOURCES += \
     ../Back/validation.c \
+    ../Back/reverse_polish_notation.c \
+    ../Back/general.c \
+    ../Back/calculation.c \
     main.cpp \
     mainwindow.cpp
 
 HEADERS += \
     ../Back/general.h \
     ../Back/validation.h \
+    ../Back/reverse_polish_notation.h \
+    ../Back/calculation.h \
     mainwindow.h
 
 FORMS += \

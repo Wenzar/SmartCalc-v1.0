@@ -53,9 +53,15 @@ OBJECTS_DIR   = ./
 ####### Files
 
 SOURCES       = ../Back/validation.c \
+		../Back/reverse_polish_notation.c \
+		../Back/general.c \
+		../Back/calculation.c \
 		../Front/main.cpp \
 		../Front/mainwindow.cpp moc_mainwindow.cpp
 OBJECTS       = validation.o \
+		reverse_polish_notation.o \
+		general.o \
+		calculation.o \
 		main.o \
 		mainwindow.o \
 		moc_mainwindow.o
@@ -220,7 +226,12 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/spec_pre.prf \
 		/usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/lex.prf \
 		../Front/SmartCalc.pro ../Back/general.h \
 		../Back/validation.h \
+		../Back/reverse_polish_notation.h \
+		../Back/calculation.h \
 		../Front/mainwindow.h ../Back/validation.c \
+		../Back/reverse_polish_notation.c \
+		../Back/general.c \
+		../Back/calculation.c \
 		../Front/main.cpp \
 		../Front/mainwindow.cpp
 QMAKE_TARGET  = SmartCalc
@@ -576,8 +587,8 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents /usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../Back/general.h ../Back/validation.h ../Front/mainwindow.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../Back/validation.c ../Front/main.cpp ../Front/mainwindow.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../Back/general.h ../Back/validation.h ../Back/reverse_polish_notation.h ../Back/calculation.h ../Front/mainwindow.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../Back/validation.c ../Back/reverse_polish_notation.c ../Back/general.c ../Back/calculation.c ../Front/main.cpp ../Front/mainwindow.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents ../Front/mainwindow.ui $(DISTDIR)/
 
 
@@ -616,6 +627,8 @@ compiler_moc_header_clean:
 moc_mainwindow.cpp: ../Front/mainwindow.h \
 		../Back/general.h \
 		../Back/validation.h \
+		../Back/reverse_polish_notation.h \
+		../Back/calculation.h \
 		moc_predefs.h \
 		/usr/lib/qt6/libexec/moc
 	/usr/lib/qt6/libexec/moc $(DEFINES) --include /home/vboxuser/Desktop/Projects/C7_SmartCalc_v1.0-1/src/build-SmartCalc-Desktop-Debug/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-clang -I/home/vboxuser/Desktop/Projects/C7_SmartCalc_v1.0-1/src/Front -I/usr/include/x86_64-linux-gnu/qt6 -I/usr/include/x86_64-linux-gnu/qt6/QtWidgets -I/usr/include/x86_64-linux-gnu/qt6/QtGui -I/usr/include/x86_64-linux-gnu/qt6/QtCore -I. -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -I/usr/include/c++/11/backward -I/usr/lib/llvm-14/lib/clang/14.0.0/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../Front/mainwindow.h -o moc_mainwindow.cpp
@@ -645,14 +658,29 @@ validation.o: ../Back/validation.c ../Back/validation.h \
 		../Back/general.h
 	$(CC) -c $(CFLAGS) $(INCPATH) -o validation.o ../Back/validation.c
 
+reverse_polish_notation.o: ../Back/reverse_polish_notation.c ../Back/reverse_polish_notation.h \
+		../Back/general.h
+	$(CC) -c $(CFLAGS) $(INCPATH) -o reverse_polish_notation.o ../Back/reverse_polish_notation.c
+
+general.o: ../Back/general.c ../Back/general.h
+	$(CC) -c $(CFLAGS) $(INCPATH) -o general.o ../Back/general.c
+
+calculation.o: ../Back/calculation.c ../Back/calculation.h \
+		../Back/general.h
+	$(CC) -c $(CFLAGS) $(INCPATH) -o calculation.o ../Back/calculation.c
+
 main.o: ../Front/main.cpp ../Front/mainwindow.h \
 		../Back/general.h \
-		../Back/validation.h
+		../Back/validation.h \
+		../Back/reverse_polish_notation.h \
+		../Back/calculation.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../Front/main.cpp
 
 mainwindow.o: ../Front/mainwindow.cpp ../Front/mainwindow.h \
 		../Back/general.h \
 		../Back/validation.h \
+		../Back/reverse_polish_notation.h \
+		../Back/calculation.h \
 		ui_mainwindow.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwindow.o ../Front/mainwindow.cpp
 

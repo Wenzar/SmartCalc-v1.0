@@ -6,6 +6,8 @@
 extern "C" {
 #include "../Back/general.h"
 #include "../Back/validation.h"
+#include "../Back/reverse_polish_notation.h"
+#include  "../Back/calculation.h" 
 }
 
 QT_BEGIN_NAMESPACE
@@ -34,5 +36,6 @@ private slots:
     void on_Trigonometry_activated(int index);
     void on_pushButton_result_clicked();
     char *get_input_array();
+    void set_result(const double result);
 };
 #endif // MAINWINDOW_H
