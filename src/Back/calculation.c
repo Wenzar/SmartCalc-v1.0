@@ -5,9 +5,6 @@
 /// @param amount_tokens - количество лексем const int
 /// @param result - указатель на результат double *
 /// @return
-/// 0 - OK;
-/// 1 - синтаксическая ошибка
-/// 2 - ошибка памяти
 int calculation(token *reverse_polish_notation_array, const int amount_tokens, double *result) {
   int output = OK;
   if (reverse_polish_notation_array == NULL || result == NULL) {
@@ -17,7 +14,7 @@ int calculation(token *reverse_polish_notation_array, const int amount_tokens, d
     stack_tokens *stack_value = init_stack();
     set_special_number(reverse_polish_notation_array, amount_tokens);
     for (int i = 0; i < amount_tokens && stack_value != NULL; ++i) {
-      if (reverse_polish_notation_array[i].status == SPECIAL_NUMBER_STATUS) {
+      if (reverse_polish_notation_array[i].status == NUMBER_STATUS) {
         stack_value = push_token(stack_value, reverse_polish_notation_array[i]);
       } else if (reverse_polish_notation_array[i].status == FUNCTION_STATUS) {
         stack_value =
