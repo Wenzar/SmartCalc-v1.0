@@ -1,38 +1,26 @@
 #ifndef GENERAL_H_
 #define GENERAL_H_
 
-#include <math.h>
 #include <ctype.h>
 #include <stdlib.h>
 #include <string.h>
 
+#define SIZE_NAME_FUNC 3
+#define EMPTY 0
 #define SYNTAX_ERROR_LINE "Syntax error!"
 #define INVALID_DATA_LINE "Invalid data!"
-#define SIZE_NAME_FUNC 3
 
-typedef enum ErrorsCode { OK, SYNTAX_ERROR, MEMORY_ERROR } ErrorsCode;
+typedef enum CodeErrors { OK, SYNTAX_ERROR, MEMORY_ERROR } CodeErrors;
 
-/// @brief Структура лексемы
-/// @param status - статус лексемы int
-/// @param value - значение числа double
-/// @param name - название оператора(функции) или спец.числа char *
-/// @param priority - приоритет операторов(функции) int
-typedef struct token {
-  int status;
-  double value;
-  char name[SIZE_NAME_FUNC];
-  int priority;
-} token;
-
-/// @brief Статусы лексем
+/// @brief | Статусы лексем |
 typedef enum status {
-  NUMBER_STATUS,
-  SPECIAL_NUMBER_STATUS,
-  OPERATOR_STATUS,
-  FUNCTION_STATUS
+  e_simple_number_status,
+  e_special_number_status,
+  e_operator_status,
+  e_function_status
 } status;
 
-/// @brief Приоритеты операций
+/// @brief | Приоритеты операций |
 typedef enum priority {
   e_left_bracket_priority,
   e_sum_priority,
@@ -46,13 +34,27 @@ typedef enum priority {
   e_right_bracket_priority,
 } priority;
 
+/// @brief | Структура лексемы |
+/// @param status - статус лексемы int
+/// @param value - значение числа double
+/// @param name - название оператора(функции) или спец.числа char *
+/// @param priority - приоритет операторов(функции) int
+typedef struct token {
+  int status;
+  double value;
+  char name[SIZE_NAME_FUNC];
+  int priority;
+} token;
+
 typedef struct stack_tokens {
   token token_object;
   struct stack_tokens *prev_token;
   int size;
 } stack_tokens;
 
-void init_token(token *token_object, int status, double value, char *name);
+char *init_char_array(const int length);
+char *realloc_char_array(char *char_array, int *prev_length);
+void init_token(token *token, int status, double value, char *name);
 int get_priority(char symbol);
 stack_tokens *init_stack();
 stack_tokens *create_new_element_stack(token token_object);

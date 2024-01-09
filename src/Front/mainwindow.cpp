@@ -105,9 +105,9 @@ void MainWindow::on_pushButton_result_clicked() {
     token *reverse_polish_notation_array =
         reverse_polish_notation(input_array, &amount_tokens);
     if (reverse_polish_notation_array != nullptr) {
-    //   double x_value = ui->x_value->text().toDouble();
       double result = 0.0;
-      output = calculation(reverse_polish_notation_array, amount_tokens, &result);
+      output = calculation(reverse_polish_notation_array, amount_tokens,
+                          &result);
       if (output == OK) {
         set_result(result);
       }
@@ -120,8 +120,7 @@ void MainWindow::on_pushButton_result_clicked() {
   if (output != OK) {
     ui->result_show->setText(SYNTAX_ERROR_LINE);
   }
-
-free(input_array);
+  free(input_array);
 }
 
 char *MainWindow::get_input_array() {

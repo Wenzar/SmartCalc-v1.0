@@ -1,5 +1,24 @@
 #include "general.h"
 
+/// @brief Создает указатель на массив символов
+/// @param length - длина массива const int
+/// @return
+/// указатель на  массив символов
+char *init_char_array(const int length) {
+  return (char *)calloc(length, sizeof(char));
+}
+
+/// @brief Изменяет размер массива символов
+/// @param char_array - массив символов char *
+/// @param prev_length - указатель на исходный размер массива int *
+/// @return
+/// измененный массив символов
+char *realloc_char_array(char *char_array, int *prev_length) {
+  *prev_length *= 2;
+  char_array = (char *)realloc(char_array, *prev_length * sizeof(char));
+  return char_array;
+}
+
 /// @brief Заполняет поля лексемы
 /// @param token_object - указатель на лексему token *
 /// @param status - статус лексемы int
@@ -14,19 +33,8 @@ void init_token(token *token_object, int status, double value, char *name) {
   }
 }
 
-/// @brief | Изменяет размер массива символов |
-/// @param  char_array - массив символов char *
-/// @param prev_length - указатель на исходный размер массива int *
-/// @return
-/// измененный массив символов
-char *realloc_char_array(char *char_array, int *prev_length) {
-  *prev_length *= 2;
-  char_array = (char *)realloc(char_array, *prev_length * sizeof(char));
-  return char_array;
-}
-
 /// @brief Возвращает приоритет операции
-/// @param symbol - первый символ оператора(функции)
+/// @param  symbol - первый символ оператора(функции)
 /// @return приоритет операции int
 int get_priority(char symbol) {
   int priority = 0;
@@ -54,7 +62,7 @@ int get_priority(char symbol) {
   return priority;
 }
 
-/// @brief | Инициализация стека лексем |
+/// @brief Инициализация стека лексем
 /// @param  token_object- добавляемая лексема
 /// @return указатель на верхний элемент
 stack_tokens *init_stack() {
@@ -66,7 +74,7 @@ stack_tokens *init_stack() {
   return head;
 }
 
-/// @brief | Создание указателя на новый элемент стека |
+/// @brief Создание указателя на новый элемент стека
 /// @param  token_object- добавляемая лексема token
 /// @return указатель на новый элемент
 stack_tokens *create_new_element_stack(token token_object) {
@@ -79,9 +87,9 @@ stack_tokens *create_new_element_stack(token token_object) {
   return head;
 }
 
-/// @brief | Добавление новой лексемы в стек |
-/// @param  head - указатель на верхний элемент
-/// @param  token_object - добавляемая лексема
+/// @brief Добавление новой лексемы в стек
+/// @param head - указатель на верхний элемент
+/// @param token_object - добавляемая лексема
 /// @return указатель на верхний элемент
 stack_tokens *push_token(stack_tokens *head, token token_object) {
   stack_tokens *output = head;
@@ -99,7 +107,7 @@ stack_tokens *push_token(stack_tokens *head, token token_object) {
   return output;
 }
 
-/// @brief | Выталкивание верхней лексемы из стека |
+/// @brief Выталкивание верхней лексемы из стека
 /// @param  head - указатель на верхний элемент
 /// @return верхняя лексема
 token pop_token(stack_tokens **head) {
@@ -114,7 +122,7 @@ token pop_token(stack_tokens **head) {
   return output;
 }
 
-/// @brief | Очистка стека |
+/// @brief Очистка стека
 /// @param  head - указатель на верхний элемент
 void free_stack(stack_tokens *head) {
   if (head != NULL) {

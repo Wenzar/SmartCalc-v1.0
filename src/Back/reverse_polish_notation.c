@@ -1,8 +1,8 @@
 #include "reverse_polish_notation.h"
 
-/// @brief Преобразует входную строку в обратную польскую нотацию
-/// @param input_array - входная строка char *
-/// @param amount_tokens - указатель на int
+/// @brief | Преобразует входную строку в обратную польскую нотацию |
+/// @param  input_array - входная строка char *
+/// @param  amount_tokens - указатель на int
 /// @return массив лексем
 token *reverse_polish_notation(char *input_array, int *amount_tokens) {
   token *reverse_polish_notation_array = NULL;
@@ -22,7 +22,7 @@ token *reverse_polish_notation(char *input_array, int *amount_tokens) {
   return reverse_polish_notation_array;
 }
 
-/// @brief Преобразует входную строку в массив лексем
+/// @brief | Преобразует входную строку в массив лексем |
 /// WARNING! Память выделяется динамически, необходима очистка
 /// @param  input_array - входная строка char *
 /// @return
@@ -43,7 +43,7 @@ token *get_token_array(char *input_array, int *amount_tokens) {
       }
       if (isdigit(*pointer)) {
         value = get_value(&pointer);
-        init_token(&token_array[*amount_tokens], NUMBER_STATUS, value,
+        init_token(&token_array[*amount_tokens], e_simple_number_status, value,
                    name_operator);
         ++(*amount_tokens);
       } else if (isalpha(*pointer)) {
@@ -54,7 +54,7 @@ token *get_token_array(char *input_array, int *amount_tokens) {
       } else {
         name_operator[0] = *pointer;
         ++pointer;
-        init_token(&token_array[*amount_tokens], OPERATOR_STATUS, value,
+        init_token(&token_array[*amount_tokens], e_operator_status, value,
                    name_operator);
         ++(*amount_tokens);
       }
@@ -72,7 +72,7 @@ token *get_token_array(char *input_array, int *amount_tokens) {
   return token_array;
 }
 
-/// @brief Создает указатель на массив лексем
+/// @brief | Создает указатель на массив лексем |
 /// @param amount_tokens - размер массива const int
 /// @return
 /// указатель на  массив лексем
@@ -80,15 +80,7 @@ token *init_token_array(const int amount_tokens) {
   return (token *)calloc(amount_tokens, sizeof(token));
 }
 
-/// @brief Создает указатель на массив символов
-/// @param length - длина массива const int
-/// @return
-/// указатель на  массив символов
-char *init_char_array(const int length) {
-  return (char *)calloc(length, sizeof(char));
-}
-
-/// @brief Изменяет размер массива лексем
+/// @brief | Изменяет размер массива лексем |
 /// @param  token_array - массив лексем token *
 /// @param prev_size - указатель на исходный размер массива int *
 /// @return
@@ -99,8 +91,8 @@ token *realloc_token_array(token *token_array, int *prev_size) {
   return token_array;
 }
 
-/// @brief Получает вещественное число из входной строки
-/// @param pointer - указатель на входную строку char *
+/// @brief | Получает вещественное число из входной строки |
+/// @param  pointer - указатель на входную строку char *
 /// @return
 /// число double
 double get_value(char **pointer) {
@@ -117,7 +109,7 @@ double get_value(char **pointer) {
       ++(*pointer);
     }
     number[i] = '\0';
-    // setlocale(LC_NUMERIC, "C");
+    setlocale(LC_NUMERIC, "C");
     value = strtod(number, NULL);
     free(number);
     number = NULL;
@@ -125,8 +117,8 @@ double get_value(char **pointer) {
   return value;
 }
 
-/// @brief Получает имена операторов(функций) из входной строки
-/// @param pointer - указатель на входную строку char *
+/// @brief | Получает имена операторов(функций) из входной строки |
+/// @param  pointer - указатель на входную строку char *
 /// @param name_operator - указатель на строку char *
 void get_name_operators(char **pointer, char *name_operator) {
   if (pointer != NULL && name_operator != NULL) {
@@ -164,111 +156,19 @@ void get_name_operators(char **pointer, char *name_operator) {
   }
 }
 
-/// @brief Возвращает статус лексемы
-/// @param symbol - первый символ оператора(функции)
+/// @brief | Возвращает статус лексемы |
+/// @param  symbol - первый символ оператора(функции)
 /// @return статус лексемы int
 int get_status(char symbol) {
   int status = -1;
   if (symbol == 'p' || symbol == 'x' || symbol == 'e') {
-    status = SPECIAL_NUMBER_STATUS;
+    status = e_special_number_status;
   } else if (symbol == 'm') {
-    status = OPERATOR_STATUS;
+    status = e_operator_status;
   } else {
-    status = FUNCTION_STATUS;
+    status = e_function_status;
   }
   return status;
-}
-
-/// @brief Дополнительная обработка ошибок массива лексем
-/// @param token_array - массив лексем token *
-/// @param amount_tokens - количество лексем int
-/// @return
-int check_token_array(token *token_array, const int amount_tokens) {
-  int output = OK;
-  if (token_array == NULL) {
-    output = MEMORY_ERROR;
-  } else {
-    int (*functions[NUM_CHECK_FUNCTIONS])(token *,
-                                          const int) = {NAMES_FUNCTIONS};
-    for (int i = 0; i < NUM_CHECK_FUNCTIONS && output == OK; ++i) {
-      output = functions[i](token_array, amount_tokens);
-    }
-  }
-  return output;
-}
-
-/// @brief Находит унарные плюсы и минусы
-/// @param token_array - массив лексем token *
-/// @param amount_tokens - количество лексем int
-/// @return
-int find_unar_operators(token *token_array, const int amount_tokens) {
-  int output = OK;
-  if (token_array == NULL) {
-    output = MEMORY_ERROR;
-  } else {
-    for (int i = 0; i < amount_tokens; ++i) {
-      if (token_array[i].status == OPERATOR_STATUS &&
-          token_array[i].priority == e_sum_priority) {
-        if ((i == 0 ||
-             (i != 0 && token_array[i - 1].status == OPERATOR_STATUS &&
-              token_array[i - 1].priority == e_left_bracket_priority)) &&
-            i != amount_tokens - 1 &&
-            (token_array[i + 1].status == FUNCTION_STATUS ||
-             token_array[i + 1].status == NUMBER_STATUS ||
-             token_array[i + 1].status == SPECIAL_NUMBER_STATUS)) {
-          if (token_array[i].name[0] == '+') {
-            token_array[i].priority = e_unar_sum_priority;
-          } else {
-            token_array[i].priority = e_unar_sub_priority;
-          }
-        }
-      }
-    }
-  }
-  return output;
-}
-
-/// @brief | Определяет пустые скобки вида () |
-/// @param token_array - массив лексем token *
-/// @param amount_tokens - количество лексем int
-/// @return
-int find_empty_brackets(token *token_array, const int amount_tokens) {
-  int output = OK;
-  if (token_array == NULL) {
-    output = MEMORY_ERROR;
-  } else {
-    for (int i = 0; i < amount_tokens && output == OK; ++i) {
-      if (token_array[i].status == OPERATOR_STATUS &&
-          token_array[i].priority == e_left_bracket_priority &&
-          token_array[i + 1].status == OPERATOR_STATUS &&
-          token_array[i + 1].priority == e_right_bracket_priority) {
-        output = SYNTAX_ERROR;
-      }
-    }
-  }
-  return output;
-}
-
-/// @brief | Определяет есть ли между функциями операторы |
-/// ошибки вида: sin(x)cos(x)
-/// @param token_array - массив лексем token *
-/// @param amount_tokens - количество лексем int
-/// @return
-int check_functions(token *token_array, const int amount_tokens) {
-  int output = OK;
-  if (token_array == NULL) {
-    output = MEMORY_ERROR;
-  } else {
-    for (int i = 0; i < amount_tokens && output == OK; ++i) {
-      if (token_array[i].status == FUNCTION_STATUS && i != 0 &&
-          token_array[i - 1].status == OPERATOR_STATUS &&
-          (token_array[i - 1].priority == e_right_bracket_priority ||
-           token_array[i - 1].priority == e_mod_priority)) {
-        output = SYNTAX_ERROR;
-      }
-    }
-  }
-  return output;
 }
 
 /// @brief | Преобразование массива лексем в обратную польскую нотацию |
@@ -284,10 +184,10 @@ token *get_reverse_polish_notation_array(token *token_array,
     stack_tokens *stack_operators = init_stack();
     int count = 0;
     for (int i = 0; i < *amount_tokens; ++i) {
-      if (token_array[i].status == NUMBER_STATUS ||
-          token_array[i].status == SPECIAL_NUMBER_STATUS) {
+      if (token_array[i].status == e_simple_number_status ||
+          token_array[i].status == e_special_number_status) {
         reverse_polish_notation_array[count++] = token_array[i];
-      } else if (token_array[i].status == FUNCTION_STATUS) {
+      } else if (token_array[i].status == e_function_status) {
         stack_operators = push_token(stack_operators, token_array[i]);
       } else {
         if (token_array[i].priority == e_right_bracket_priority) {
@@ -297,7 +197,7 @@ token *get_reverse_polish_notation_array(token *token_array,
             break;
           }
         } else if (token_array[i].priority == e_left_bracket_priority ||
-                   stack_operators->size == 0 ||
+                   stack_operators->size == EMPTY ||
                    token_array[i].priority >
                        stack_operators->token_object.priority) {
           stack_operators = push_token(stack_operators, token_array[i]);
@@ -326,7 +226,7 @@ stack_tokens *operator_is_right_bracket(token *reverse_polish_notation_array,
                                         int *count) {
   if (reverse_polish_notation_array != NULL && stack_operators != NULL &&
       count != NULL) {
-    while (stack_operators->size != 0 &&
+    while (stack_operators->size != EMPTY &&
            stack_operators->token_object.priority != e_left_bracket_priority) {
       reverse_polish_notation_array[(*count)++] = pop_token(&stack_operators);
     }
@@ -338,7 +238,7 @@ stack_tokens *operator_is_right_bracket(token *reverse_polish_notation_array,
       reverse_polish_notation_array = NULL;
       *count = 0;
     }
-    if (stack_operators->token_object.status == FUNCTION_STATUS) {
+    if (stack_operators->token_object.status == e_function_status) {
       reverse_polish_notation_array[(*count)++] = pop_token(&stack_operators);
     }
   }
@@ -357,7 +257,7 @@ stack_tokens *priority_is_less(const token token_object,
                                stack_tokens *stack_operators, int *count) {
   if (reverse_polish_notation_array != NULL && stack_operators != NULL &&
       count != NULL) {
-    while (stack_operators->size != 0 &&
+    while (stack_operators->size != EMPTY &&
            token_object.priority <= stack_operators->token_object.priority) {
       reverse_polish_notation_array[(*count)++] = pop_token(&stack_operators);
     }
@@ -374,9 +274,112 @@ void cleaning_stack_operators(token *reverse_polish_notation_array,
                               stack_tokens *stack_operators, int *count) {
   if (reverse_polish_notation_array != NULL && stack_operators != NULL &&
       count != NULL) {
-    while (stack_operators->size != 0) {
+    while (stack_operators->size != EMPTY) {
       reverse_polish_notation_array[(*count)++] = pop_token(&stack_operators);
     }
     free_stack(stack_operators);
   }
+}
+
+/// @brief | Дополнительная обработка ошибок массива лексем |
+/// @param token_array - массив лексем token *
+/// @param amount_tokens - количество лексем int
+/// @return
+/// 0 - OK;
+/// 1 - синтаксическая ошибка
+/// 2 - ошибка памяти
+int check_token_array(token *token_array, const int amount_tokens) {
+  int output = OK;
+  if (token_array == NULL) {
+    output = MEMORY_ERROR;
+  } else {
+    int (*functions[NUM_CHECK_FUNCTIONS])(token *,
+                                          const int) = {NAMES_FUNCTIONS};
+    for (int i = 0; i < NUM_CHECK_FUNCTIONS && output == OK; ++i) {
+      output = functions[i](token_array, amount_tokens);
+    }
+  }
+  return output;
+}
+
+/// @brief | Находит унарные плюсы и минусы |
+/// @param token_array - массив лексем token *
+/// @param amount_tokens - количество лексем int
+/// @return
+/// 0 - OK;
+/// 2 - ошибка памяти
+int find_unar_operators(token *token_array, const int amount_tokens) {
+  int output = OK;
+  if (token_array == NULL) {
+    output = MEMORY_ERROR;
+  } else {
+    for (int i = 0; i < amount_tokens; ++i) {
+      if (token_array[i].status == e_operator_status &&
+          token_array[i].priority == e_sum_priority) {
+        if ((i == 0 ||
+             (i != 0 && token_array[i - 1].status == e_operator_status &&
+              token_array[i - 1].priority == e_left_bracket_priority)) &&
+            i != amount_tokens - 1 &&
+            (token_array[i + 1].status == e_function_status ||
+             token_array[i + 1].status == e_simple_number_status ||
+             token_array[i + 1].status == e_special_number_status)) {
+          if (token_array[i].name[0] == '+') {
+            token_array[i].priority = e_unar_sum_priority;
+          } else {
+            token_array[i].priority = e_unar_sub_priority;
+          }
+        }
+      }
+    }
+  }
+  return output;
+}
+
+/// @brief | Определяет пустые скобки вида () |
+/// @param token_array - массив лексем token *
+/// @param amount_tokens - количество лексем int
+/// @return
+/// 0 - OK;
+/// 1 - синтаксическая ошибка
+/// 2 - ошибка памяти
+int find_empty_brackets(token *token_array, const int amount_tokens) {
+  int output = OK;
+  if (token_array == NULL) {
+    output = MEMORY_ERROR;
+  } else {
+    for (int i = 0; i < amount_tokens && output == OK; ++i) {
+      if (token_array[i].status == e_operator_status &&
+          token_array[i].priority == e_left_bracket_priority &&
+          token_array[i + 1].status == e_operator_status &&
+          token_array[i + 1].priority == e_right_bracket_priority) {
+        output = SYNTAX_ERROR;
+      }
+    }
+  }
+  return output;
+}
+
+/// @brief | Определяет есть ли между функциями операторы |
+/// ошибки вида: sin(x)cos(x)
+/// @param token_array - массив лексем token *
+/// @param amount_tokens - количество лексем int
+/// @return
+/// 0 - OK;
+/// 1 - синтаксическая ошибка
+/// 2 - ошибка памяти
+int check_functions(token *token_array, const int amount_tokens) {
+  int output = OK;
+  if (token_array == NULL) {
+    output = MEMORY_ERROR;
+  } else {
+    for (int i = 0; i < amount_tokens && output == OK; ++i) {
+      if (token_array[i].status == e_function_status && i != 0 &&
+          token_array[i - 1].status == e_operator_status &&
+          (token_array[i - 1].priority == e_right_bracket_priority ||
+           token_array[i - 1].priority == e_mod_priority)) {
+        output = SYNTAX_ERROR;
+      }
+    }
+  }
+  return output;
 }
