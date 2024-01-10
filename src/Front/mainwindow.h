@@ -35,7 +35,7 @@ private slots:
     void function_button();
     void on_Trigonometry_activated(int index);
     void on_pushButton_result_clicked();
-    char *get_input_array();
+    char *get_input_string();
     void set_result(const double result);
 };
 #endif // MAINWINDOW_H

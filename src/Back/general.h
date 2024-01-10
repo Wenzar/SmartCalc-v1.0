@@ -12,7 +12,7 @@
 
 typedef enum CodeErrors { OK, SYNTAX_ERROR, MEMORY_ERROR } CodeErrors;
 
-/// @brief | Статусы лексем |
+/// @brief Статусы лексем
 typedef enum status {
   e_simple_number_status,
   e_special_number_status,
@@ -20,7 +20,7 @@ typedef enum status {
   e_function_status
 } status;
 
-/// @brief | Приоритеты операций |
+/// @brief Приоритеты операций
 typedef enum priority {
   e_left_bracket_priority,
   e_sum_priority,
@@ -34,32 +34,32 @@ typedef enum priority {
   e_right_bracket_priority,
 } priority;
 
-/// @brief | Структура лексемы |
+/// @brief Структура лексемы
 /// @param status - статус лексемы int
 /// @param value - значение числа double
 /// @param name - название оператора(функции) или спец.числа char *
 /// @param priority - приоритет операторов(функции) int
-typedef struct token {
+typedef struct trait {
   int status;
   double value;
   char name[SIZE_NAME_FUNC];
   int priority;
-} token;
+} trait;
 
-typedef struct stack_tokens {
-  token token_object;
-  struct stack_tokens *prev_token;
+typedef struct stack_traits {
+  trait trait_object;
+  struct stack_traits *prev_trait;
   int size;
-} stack_tokens;
+} stack_traits;
 
 char *init_char_array(const int length);
 char *realloc_char_array(char *char_array, int *prev_length);
-void init_token(token *token, int status, double value, char *name);
+void init_trait(trait *trait, int status, double value, char *name);
 int get_priority(char symbol);
-stack_tokens *init_stack();
-stack_tokens *create_new_element_stack(token token_object);
-stack_tokens *push_token(stack_tokens *head, token token_object);
-token pop_token(stack_tokens **head);
-void free_stack(stack_tokens *head);
+stack_traits *init_stack();
+stack_traits *create_new_element_stack(trait trait_object);
+stack_traits *push_trait(stack_traits *head, trait trait_object);
+trait pop_trait(stack_traits **head);
+void free_stack(stack_traits *head);
 
 #endif  // GENERAL_H_

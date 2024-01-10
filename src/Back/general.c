@@ -2,8 +2,7 @@
 
 /// @brief Создает указатель на массив символов
 /// @param length - длина массива const int
-/// @return
-/// указатель на  массив символов
+/// @return указатель на массив символов
 char *init_char_array(const int length) {
   return (char *)calloc(length, sizeof(char));
 }
@@ -11,8 +10,7 @@ char *init_char_array(const int length) {
 /// @brief Изменяет размер массива символов
 /// @param char_array - массив символов char *
 /// @param prev_length - указатель на исходный размер массива int *
-/// @return
-/// измененный массив символов
+/// @return измененный массив символов
 char *realloc_char_array(char *char_array, int *prev_length) {
   *prev_length *= 2;
   char_array = (char *)realloc(char_array, *prev_length * sizeof(char));
@@ -20,16 +18,16 @@ char *realloc_char_array(char *char_array, int *prev_length) {
 }
 
 /// @brief Заполняет поля лексемы
-/// @param token_object - указатель на лексему token *
+/// @param trait_object - указатель на лексему trait *
 /// @param status - статус лексемы int
 /// @param value - значение вещественного числа double
 /// @param name - имя оператора(функции) char *
-void init_token(token *token_object, int status, double value, char *name) {
-  if (token_object != NULL) {
-    token_object->status = status;
-    token_object->value = value;
-    strcpy(token_object->name, name);
-    token_object->priority = get_priority(name[0]);
+void init_trait(trait *trait_object, int status, double value, char *name) {
+  if (trait_object != NULL) {
+    trait_object->status = status;
+    trait_object->value = value;
+    strcpy(trait_object->name, name);
+    trait_object->priority = get_priority(name[0]);
   }
 }
 
@@ -56,32 +54,33 @@ int get_priority(char symbol) {
     case ')':
       priority = e_right_bracket_priority;
       break;
-    default:
+    case '(':
       priority = e_left_bracket_priority;
+      break;
   }
   return priority;
 }
 
 /// @brief Инициализация стека лексем
-/// @param  token_object- добавляемая лексема
+/// @param  trait_object- добавляемая лексема
 /// @return указатель на верхний элемент
-stack_tokens *init_stack() {
-  stack_tokens *head = (stack_tokens *)malloc(sizeof(stack_tokens));
+stack_traits *init_stack() {
+  stack_traits *head = (stack_traits *)malloc(sizeof(stack_traits));
   if (head != NULL) {
-    head->prev_token = NULL;
+    head->prev_trait = NULL;
     head->size = 0;
   }
   return head;
 }
 
 /// @brief Создание указателя на новый элемент стека
-/// @param  token_object- добавляемая лексема token
+/// @param trait_object- добавляемая лексема trait
 /// @return указатель на новый элемент
-stack_tokens *create_new_element_stack(token token_object) {
-  stack_tokens *head = (stack_tokens *)malloc(sizeof(stack_tokens));
+stack_traits *create_new_element_stack(trait trait_object) {
+  stack_traits *head = (stack_traits *)malloc(sizeof(stack_traits));
   if (head != NULL) {
-    head->token_object = token_object;
-    head->prev_token = NULL;
+    head->trait_object = trait_object;
+    head->prev_trait = NULL;
     head->size = 0;
   }
   return head;
@@ -89,19 +88,19 @@ stack_tokens *create_new_element_stack(token token_object) {
 
 /// @brief Добавление новой лексемы в стек
 /// @param head - указатель на верхний элемент
-/// @param token_object - добавляемая лексема
+/// @param trait_object - добавляемая лексема
 /// @return указатель на верхний элемент
-stack_tokens *push_token(stack_tokens *head, token token_object) {
-  stack_tokens *output = head;
+stack_traits *push_trait(stack_traits *head, trait trait_object) {
+  stack_traits *output = head;
   if (head != NULL && head->size == 0) {
-    head->token_object = token_object;
+    head->trait_object = trait_object;
     ++(head->size);
   } else if (head != NULL && head->size != 0) {
-    stack_tokens *new_token = create_new_element_stack(token_object);
-    if (new_token != NULL) {
-      output = new_token;
-      new_token->prev_token = head;
-      new_token->size = head->size + 1;
+    stack_traits *new_trait = create_new_element_stack(trait_object);
+    if (new_trait != NULL) {
+      output = new_trait;
+      new_trait->prev_trait = head;
+      new_trait->size = head->size + 1;
     }
   }
   return output;
@@ -110,24 +109,24 @@ stack_tokens *push_token(stack_tokens *head, token token_object) {
 /// @brief Выталкивание верхней лексемы из стека
 /// @param  head - указатель на верхний элемент
 /// @return верхняя лексема
-token pop_token(stack_tokens **head) {
-  token output = (*head)->token_object;
+trait pop_trait(stack_traits **head) {
+  trait output = (*head)->trait_object;
   if ((*head)->size == 1) {
     (*head)->size = 0;
   } else {
-    stack_tokens *tmp = (*head);
-    (*head) = (*head)->prev_token;
+    stack_traits *tmp = (*head);
+    (*head) = (*head)->prev_trait;
     free(tmp);
   }
   return output;
 }
 
 /// @brief Очистка стека
-/// @param  head - указатель на верхний элемент
-void free_stack(stack_tokens *head) {
+/// @param head - указатель на верхний элемент
+void free_stack(stack_traits *head) {
   if (head != NULL) {
-    while (head->prev_token != NULL) {
-      pop_token(&head);
+    while (head->prev_trait != NULL) {
+      pop_trait(&head);
     }
     free(head);
     head = NULL;

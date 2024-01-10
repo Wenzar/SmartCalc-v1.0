@@ -3,23 +3,21 @@
 #ifndef VALIDATION_H_
 #define VALIDATION_H_
 
-#define AMOUNT_CHECK_FUNCTIONS 4
-#define NAMES_CHECK_FUNCTIONS                                            \
-  check_allowed_characters, check_amount_brackets, check_name_operators, \
-      check_points
-#define AMOUNT_OPERATORS 13
-#define NAMES_OPERATORS                                                       \
+#define NUMBER_OF_FUNCTIONS 3
+#define NAMES_OF_FUNCTIONS \
+  check_number_of_braces, check_name_operators, check_points
+#define AMOUNT_TRIGONOMETRY_FUNCTIONS 10
+#define NAMES_TRIGONOMETRY_FUNCTIONS                                                       \
   {                                                                           \
     "mod", "cos(", "sin(", "tan(", "acos(", "asin(", "atan(", "sqrt(", "ln(", \
-        "log(", "x", "pi", "e"                                                \
+        "log("                                                                \
   }
 
-int input_array_validation(char *input_array);
-int check_allowed_characters(char *input_array);
-int check_amount_brackets(char *input_array);
-int check_name_operators(char *input_array);
-int compare_name_operators(char *potential_operator);
-int check_points(char *input_array);
+int input_string_validation(char *input_string);
+int check_number_of_braces(char *input_string);
+int check_name_operators(char *input_string);
+int compare_function_name(char *potential_function);
+int check_points(char *input_string);
 int find_point(char *symbol, char **start, char **point, char **end);
 int check_pointers(char *symbol, char **start, char **point, char **end);
 

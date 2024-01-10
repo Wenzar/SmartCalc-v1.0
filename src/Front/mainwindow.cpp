@@ -97,22 +97,22 @@ void MainWindow::on_Trigonometry_activated(int index) {
 }
 
 void MainWindow::on_pushButton_result_clicked() {
-  char *input_array = get_input_array();
+  char *input_string = get_input_string();
   ui->result_show->clear();
-  int output = input_array_validation(input_array);
+  int output = input_string_validation(input_string);
   if (output == OK) {
-    int amount_tokens = 0;
-    token *reverse_polish_notation_array =
-        reverse_polish_notation(input_array, &amount_tokens);
-    if (reverse_polish_notation_array != nullptr) {
+    int amount_traits = 0;
+    trait *r_p_n_array =
+        reverse_polish_notation(input_string, &amount_traits);
+    if (r_p_n_array != nullptr) {
       double result = 0.0;
-      output = calculation(reverse_polish_notation_array, amount_tokens,
+      output = calculation(r_p_n_array, amount_traits,
                           &result);
       if (output == OK) {
         set_result(result);
       }
-      free(reverse_polish_notation_array);
-      reverse_polish_notation_array = nullptr;
+      free(r_p_n_array);
+      r_p_n_array = nullptr;
     } else {
       output = SYNTAX_ERROR;
     }
@@ -120,28 +120,27 @@ void MainWindow::on_pushButton_result_clicked() {
   if (output != OK) {
     ui->result_show->setText(SYNTAX_ERROR_LINE);
   }
-  free(input_array);
+  free(input_string);
 }
 
-char *MainWindow::get_input_array() {
+char *MainWindow::get_input_string() {
   QString text = ui->result_show->text();
   size_t size = text.size();
-  char *input_array = nullptr;
+  char *input_string = nullptr;
   if (size > 0) {
-    input_array = (char *)calloc(size + 1, sizeof(char));
+    input_string = (char *)calloc(size + 1, sizeof(char));
     std::string convert = text.toStdString();
     for (size_t i = 0; i < size; i++) {
-      input_array[i] = convert[i];
+      input_string[i] = convert[i];
     }
-    input_array[size] = '\0';
+    input_string[size] = '\0';
   }
-  return input_array;
+  return input_string;
 }
 
 void MainWindow::set_result(const double result) {
   if (isinf(result) || isnan(result) == OK) {
     char result_str[255] = {'\0'};
-    // setlocale(LC_NUMERIC, "C");
     sprintf(result_str, "%.10g", result);
     ui->result_show->setText(result_str);
   } else {

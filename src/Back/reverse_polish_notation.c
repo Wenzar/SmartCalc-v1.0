@@ -1,97 +1,94 @@
 #include "reverse_polish_notation.h"
 
-/// @brief | Преобразует входную строку в обратную польскую нотацию |
-/// @param  input_array - входная строка char *
-/// @param  amount_tokens - указатель на int
+/// @brief Преобразует входную строку в обратную польскую нотацию
+/// @param input_string - входная строка char *
+/// @param amount_traits - указатель на int
 /// @return массив лексем
-token *reverse_polish_notation(char *input_array, int *amount_tokens) {
-  token *reverse_polish_notation_array = NULL;
-  if (input_array != NULL && amount_tokens != NULL) {
-    *amount_tokens = 0;
-    token *token_array = get_token_array(input_array, amount_tokens);
-    if (token_array != NULL) {
-      int result = check_token_array(token_array, *amount_tokens);
+trait *reverse_polish_notation(char *input_string, int *amount_traits) {
+  trait *r_p_n_array = NULL;
+  if (input_string != NULL && amount_traits != NULL) {
+    *amount_traits = 0;
+    trait *trait_array = get_trait_array(input_string, amount_traits);
+    if (trait_array != NULL) {
+      int result = check_trait_array(trait_array, *amount_traits);
       if (result == OK) {
-        reverse_polish_notation_array =
-            get_reverse_polish_notation_array(token_array, amount_tokens);
+        r_p_n_array = get_r_p_n_array(trait_array, amount_traits);
       }
-      free(token_array);
-      token_array = NULL;
+      free(trait_array);
+      trait_array = NULL;
     }
   }
-  return reverse_polish_notation_array;
+  return r_p_n_array;
 }
 
-/// @brief | Преобразует входную строку в массив лексем |
-/// WARNING! Память выделяется динамически, необходима очистка
-/// @param  input_array - входная строка char *
-/// @return
-/// массив лексем token *
-token *get_token_array(char *input_array, int *amount_tokens) {
-  token *token_array = NULL;
-  if (input_array != NULL && amount_tokens != NULL) {
-    *amount_tokens = 0;
-    char *pointer = input_array;
+/// @brief Преобразует входную строку в массив лексем
+/// @param  input_string - входная строка char *
+/// @return массив лексем trait *
+trait *get_trait_array(char *input_string, int *amount_traits) {
+  trait *trait_array = NULL;
+  if (input_string != NULL && amount_traits != NULL) {
+    *amount_traits = 0;
+    char *pointer = input_string;
     double value = 0.0;
-    int size_token_array = 5;
-    token_array = init_token_array(size_token_array);
+    int size_trait_array = 5;
+    trait_array = init_trait_array(size_trait_array);
     char *name_operator = init_char_array(SIZE_NAME_FUNC);
     int status = -1;
     while (*pointer != '\0') {
-      if (*amount_tokens == size_token_array - 1) {
-        token_array = realloc_token_array(token_array, &size_token_array);
+      if (*amount_traits == size_trait_array - 1) {
+        trait_array = realloc_trait_array(trait_array, &size_trait_array);
       }
       if (isdigit(*pointer)) {
         value = get_value(&pointer);
-        init_token(&token_array[*amount_tokens], e_simple_number_status, value,
+        init_trait(&trait_array[*amount_traits], e_simple_number_status, value,
                    name_operator);
-        ++(*amount_tokens);
+        ++(*amount_traits);
       } else if (isalpha(*pointer)) {
         get_name_operators(&pointer, name_operator);
         status = get_status(name_operator[0]);
-        init_token(&token_array[*amount_tokens], status, value, name_operator);
-        ++(*amount_tokens);
+        init_trait(&trait_array[*amount_traits], status, value, name_operator);
+        ++(*amount_traits);
       } else {
         name_operator[0] = *pointer;
         ++pointer;
-        init_token(&token_array[*amount_tokens], e_operator_status, value,
+        init_trait(&trait_array[*amount_traits], e_operator_status, value,
                    name_operator);
-        ++(*amount_tokens);
+        ++(*amount_traits);
       }
       value = 0.0;
       status = -1;
       memset(name_operator, '\0', SIZE_NAME_FUNC);
     }
-    if (!(*amount_tokens)) {
-      free(token_array);
-      token_array = NULL;
+    if (!(*amount_traits)) {
+      free(trait_array);
+      trait_array = NULL;
     }
     free(name_operator);
     name_operator = NULL;
   }
-  return token_array;
+  return trait_array;
 }
 
-/// @brief | Создает указатель на массив лексем |
-/// @param amount_tokens - размер массива const int
+/// @brief Создает указатель на массив лексем
+/// @param amount_traits - размер массива const int
 /// @return
 /// указатель на  массив лексем
-token *init_token_array(const int amount_tokens) {
-  return (token *)calloc(amount_tokens, sizeof(token));
+trait *init_trait_array(const int amount_traits) {
+  return (trait *)calloc(amount_traits, sizeof(trait));
 }
 
-/// @brief | Изменяет размер массива лексем |
-/// @param  token_array - массив лексем token *
+/// @brief Изменяет размер массива лексем
+/// @param trait_array - массив лексем trait *
 /// @param prev_size - указатель на исходный размер массива int *
 /// @return
 /// измененный массив лексем
-token *realloc_token_array(token *token_array, int *prev_size) {
+trait *realloc_trait_array(trait *trait_array, int *prev_size) {
   *prev_size *= 2;
-  token_array = (token *)realloc(token_array, *prev_size * sizeof(token));
-  return token_array;
+  trait_array = (trait *)realloc(trait_array, *prev_size * sizeof(trait));
+  return trait_array;
 }
 
-/// @brief | Получает вещественное число из входной строки |
+/// @brief Получает вещественное число из входной строки
 /// @param  pointer - указатель на входную строку char *
 /// @return
 /// число double
@@ -117,7 +114,7 @@ double get_value(char **pointer) {
   return value;
 }
 
-/// @brief | Получает имена операторов(функций) из входной строки |
+/// @brief Получает имена операторов(функций) из входной строки
 /// @param  pointer - указатель на входную строку char *
 /// @param name_operator - указатель на строку char *
 void get_name_operators(char **pointer, char *name_operator) {
@@ -171,162 +168,154 @@ int get_status(char symbol) {
   return status;
 }
 
-/// @brief | Преобразование массива лексем в обратную польскую нотацию |
-/// WARNING! Память выделяется динамически, необходима очистка
-/// @param token_array - массив лексем token *
-/// @param amount_tokens - количество лексем
+/// @brief Преобразование массива лексем в обратную польскую нотацию
+/// @param trait_array - массив лексем trait *
+/// @param amount_traits - количество лексем
 /// @return преобразованная строка лексем
-token *get_reverse_polish_notation_array(token *token_array,
-                                         int *amount_tokens) {
-  token *reverse_polish_notation_array = NULL;
-  if (token_array != NULL) {
-    reverse_polish_notation_array = init_token_array(*amount_tokens);
-    stack_tokens *stack_operators = init_stack();
+trait *get_r_p_n_array(trait *trait_array, int *amount_traits) {
+  trait *r_p_n_array = NULL;
+  if (trait_array != NULL) {
+    r_p_n_array = init_trait_array(*amount_traits);
+    stack_traits *stack_operators = init_stack();
     int count = 0;
-    for (int i = 0; i < *amount_tokens; ++i) {
-      if (token_array[i].status == e_simple_number_status ||
-          token_array[i].status == e_special_number_status) {
-        reverse_polish_notation_array[count++] = token_array[i];
-      } else if (token_array[i].status == e_function_status) {
-        stack_operators = push_token(stack_operators, token_array[i]);
+    for (int i = 0; i < *amount_traits; ++i) {
+      if (trait_array[i].status == e_simple_number_status ||
+          trait_array[i].status == e_special_number_status) {
+        r_p_n_array[count++] = trait_array[i];
+      } else if (trait_array[i].status == e_function_status) {
+        stack_operators = push_trait(stack_operators, trait_array[i]);
       } else {
-        if (token_array[i].priority == e_right_bracket_priority) {
-          stack_operators = operator_is_right_bracket(
-              reverse_polish_notation_array, stack_operators, &count);
+        if (trait_array[i].priority == e_right_bracket_priority) {
+          stack_operators =
+              operator_is_right_bracket(r_p_n_array, stack_operators, &count);
           if (stack_operators == NULL) {
             break;
           }
-        } else if (token_array[i].priority == e_left_bracket_priority ||
+        } else if (trait_array[i].priority == e_left_bracket_priority ||
                    stack_operators->size == EMPTY ||
-                   token_array[i].priority >
-                       stack_operators->token_object.priority) {
-          stack_operators = push_token(stack_operators, token_array[i]);
-        } else if (token_array[i].priority <=
-                   stack_operators->token_object.priority) {
-          stack_operators =
-              priority_is_less(token_array[i], reverse_polish_notation_array,
-                               stack_operators, &count);
+                   trait_array[i].priority >
+                       stack_operators->trait_object.priority) {
+          stack_operators = push_trait(stack_operators, trait_array[i]);
+        } else if (trait_array[i].priority <=
+                   stack_operators->trait_object.priority) {
+          stack_operators = priority_is_less(trait_array[i], r_p_n_array,
+                                             stack_operators, &count);
         }
       }
     }
-    cleaning_stack_operators(reverse_polish_notation_array, stack_operators,
-                             &count);
-    *amount_tokens = count;
+    cleaning_stack_operators(r_p_n_array, stack_operators, &count);
+    *amount_traits = count;
   }
-  return reverse_polish_notation_array;
+  return r_p_n_array;
 }
 
 /// @brief | Обр.польская нотация: лексема - правая скобка |
-/// @param reverse_polish_notation_array - преобразованный массив лексем token *
-/// @param stack_operators - стек операторов stack_tokens *
+/// @param r_p_n_array - преобразованный массив лексем trait *
+/// @param stack_operators - стек операторов stack_traits *
 /// @param count - указатель на количество элементов в массиве лексем
 /// @return указатель на стек операторов
-stack_tokens *operator_is_right_bracket(token *reverse_polish_notation_array,
-                                        stack_tokens *stack_operators,
+stack_traits *operator_is_right_bracket(trait *r_p_n_array,
+                                        stack_traits *stack_operators,
                                         int *count) {
-  if (reverse_polish_notation_array != NULL && stack_operators != NULL &&
-      count != NULL) {
+  if (r_p_n_array != NULL && stack_operators != NULL && count != NULL) {
     while (stack_operators->size != EMPTY &&
-           stack_operators->token_object.priority != e_left_bracket_priority) {
-      reverse_polish_notation_array[(*count)++] = pop_token(&stack_operators);
+           stack_operators->trait_object.priority != e_left_bracket_priority) {
+      r_p_n_array[(*count)++] = pop_trait(&stack_operators);
     }
-    if (stack_operators->token_object.priority == e_left_bracket_priority) {
-      pop_token(&stack_operators);
+    if (stack_operators->trait_object.priority == e_left_bracket_priority) {
+      pop_trait(&stack_operators);
     } else {
       free_stack(stack_operators);
-      free(reverse_polish_notation_array);
-      reverse_polish_notation_array = NULL;
+      free(r_p_n_array);
+      r_p_n_array = NULL;
       *count = 0;
     }
-    if (stack_operators->token_object.status == e_function_status) {
-      reverse_polish_notation_array[(*count)++] = pop_token(&stack_operators);
+    if (stack_operators->trait_object.status == e_function_status) {
+      r_p_n_array[(*count)++] = pop_trait(&stack_operators);
     }
   }
   return stack_operators;
 }
 
-/// @brief | Обр.польская нотация : приоритет оператора меньше, чем
-/// у верхнего оператора в стеке |
-/// @param token_object - проверяемая лексема
-/// @param reverse_polish_notation_array - преобразованный массив лексем token *
-/// @param stack_operators - стек операторов stack_tokens *
+/// @brief Обр.польская нотация : приоритет оператора меньше, чем
+/// у верхнего оператора в стеке
+/// @param trait_object - проверяемая лексема
+/// @param r_p_n_array - преобразованный массив лексем trait *
+/// @param stack_operators - стек операторов stack_traits *
 /// @param count - указатель на количество элементов в массиве лексем
 ///@return указатель на стек операторов
-stack_tokens *priority_is_less(const token token_object,
-                               token *reverse_polish_notation_array,
-                               stack_tokens *stack_operators, int *count) {
-  if (reverse_polish_notation_array != NULL && stack_operators != NULL &&
-      count != NULL) {
+stack_traits *priority_is_less(const trait trait_object, trait *r_p_n_array,
+                               stack_traits *stack_operators, int *count) {
+  if (r_p_n_array != NULL && stack_operators != NULL && count != NULL) {
     while (stack_operators->size != EMPTY &&
-           token_object.priority <= stack_operators->token_object.priority) {
-      reverse_polish_notation_array[(*count)++] = pop_token(&stack_operators);
+           trait_object.priority <= stack_operators->trait_object.priority) {
+      r_p_n_array[(*count)++] = pop_trait(&stack_operators);
     }
-    stack_operators = push_token(stack_operators, token_object);
+    stack_operators = push_trait(stack_operators, trait_object);
   }
   return stack_operators;
 }
 
-/// @brief | Обр.польская нотация: очистка стека операторов после цикла |
-/// @param reverse_polish_notation_array - преобразованный массив лексем token *
-/// @param stack_operators - стек операторов stack_tokens *
+/// @brief Обр.польская нотация: очистка стека операторов после цикла
+/// @param r_p_n_array - преобразованный массив лексем trait *
+/// @param stack_operators - стек операторов stack_traits *
 /// @param count - указатель на количество элементов в массиве лексем
-void cleaning_stack_operators(token *reverse_polish_notation_array,
-                              stack_tokens *stack_operators, int *count) {
-  if (reverse_polish_notation_array != NULL && stack_operators != NULL &&
-      count != NULL) {
+void cleaning_stack_operators(trait *r_p_n_array, stack_traits *stack_operators,
+                              int *count) {
+  if (r_p_n_array != NULL && stack_operators != NULL && count != NULL) {
     while (stack_operators->size != EMPTY) {
-      reverse_polish_notation_array[(*count)++] = pop_token(&stack_operators);
+      r_p_n_array[(*count)++] = pop_trait(&stack_operators);
     }
     free_stack(stack_operators);
   }
 }
 
 /// @brief | Дополнительная обработка ошибок массива лексем |
-/// @param token_array - массив лексем token *
-/// @param amount_tokens - количество лексем int
+/// @param trait_array - массив лексем trait *
+/// @param amount_traits - количество лексем int
 /// @return
 /// 0 - OK;
 /// 1 - синтаксическая ошибка
 /// 2 - ошибка памяти
-int check_token_array(token *token_array, const int amount_tokens) {
+int check_trait_array(trait *trait_array, const int amount_traits) {
   int output = OK;
-  if (token_array == NULL) {
+  if (trait_array == NULL) {
     output = MEMORY_ERROR;
   } else {
-    int (*functions[NUM_CHECK_FUNCTIONS])(token *,
+    int (*functions[NUM_CHECK_FUNCTIONS])(trait *,
                                           const int) = {NAMES_FUNCTIONS};
     for (int i = 0; i < NUM_CHECK_FUNCTIONS && output == OK; ++i) {
-      output = functions[i](token_array, amount_tokens);
+      output = functions[i](trait_array, amount_traits);
     }
   }
   return output;
 }
 
 /// @brief | Находит унарные плюсы и минусы |
-/// @param token_array - массив лексем token *
-/// @param amount_tokens - количество лексем int
+/// @param trait_array - массив лексем trait *
+/// @param amount_traits - количество лексем int
 /// @return
 /// 0 - OK;
 /// 2 - ошибка памяти
-int find_unar_operators(token *token_array, const int amount_tokens) {
+int find_unar_operators(trait *trait_array, const int amount_traits) {
   int output = OK;
-  if (token_array == NULL) {
+  if (trait_array == NULL) {
     output = MEMORY_ERROR;
   } else {
-    for (int i = 0; i < amount_tokens; ++i) {
-      if (token_array[i].status == e_operator_status &&
-          token_array[i].priority == e_sum_priority) {
+    for (int i = 0; i < amount_traits; ++i) {
+      if (trait_array[i].status == e_operator_status &&
+          trait_array[i].priority == e_sum_priority) {
         if ((i == 0 ||
-             (i != 0 && token_array[i - 1].status == e_operator_status &&
-              token_array[i - 1].priority == e_left_bracket_priority)) &&
-            i != amount_tokens - 1 &&
-            (token_array[i + 1].status == e_function_status ||
-             token_array[i + 1].status == e_simple_number_status ||
-             token_array[i + 1].status == e_special_number_status)) {
-          if (token_array[i].name[0] == '+') {
-            token_array[i].priority = e_unar_sum_priority;
+             (i != 0 && trait_array[i - 1].status == e_operator_status &&
+              trait_array[i - 1].priority == e_left_bracket_priority)) &&
+            i != amount_traits - 1 &&
+            (trait_array[i + 1].status == e_function_status ||
+             trait_array[i + 1].status == e_simple_number_status ||
+             trait_array[i + 1].status == e_special_number_status)) {
+          if (trait_array[i].name[0] == '+') {
+            trait_array[i].priority = e_unar_sum_priority;
           } else {
-            token_array[i].priority = e_unar_sub_priority;
+            trait_array[i].priority = e_unar_sub_priority;
           }
         }
       }
@@ -336,22 +325,22 @@ int find_unar_operators(token *token_array, const int amount_tokens) {
 }
 
 /// @brief | Определяет пустые скобки вида () |
-/// @param token_array - массив лексем token *
-/// @param amount_tokens - количество лексем int
+/// @param trait_array - массив лексем trait *
+/// @param amount_traits - количество лексем int
 /// @return
 /// 0 - OK;
 /// 1 - синтаксическая ошибка
 /// 2 - ошибка памяти
-int find_empty_brackets(token *token_array, const int amount_tokens) {
+int find_empty_brackets(trait *trait_array, const int amount_traits) {
   int output = OK;
-  if (token_array == NULL) {
+  if (trait_array == NULL) {
     output = MEMORY_ERROR;
   } else {
-    for (int i = 0; i < amount_tokens && output == OK; ++i) {
-      if (token_array[i].status == e_operator_status &&
-          token_array[i].priority == e_left_bracket_priority &&
-          token_array[i + 1].status == e_operator_status &&
-          token_array[i + 1].priority == e_right_bracket_priority) {
+    for (int i = 0; i < amount_traits && output == OK; ++i) {
+      if (trait_array[i].status == e_operator_status &&
+          trait_array[i].priority == e_left_bracket_priority &&
+          trait_array[i + 1].status == e_operator_status &&
+          trait_array[i + 1].priority == e_right_bracket_priority) {
         output = SYNTAX_ERROR;
       }
     }
@@ -361,22 +350,22 @@ int find_empty_brackets(token *token_array, const int amount_tokens) {
 
 /// @brief | Определяет есть ли между функциями операторы |
 /// ошибки вида: sin(x)cos(x)
-/// @param token_array - массив лексем token *
-/// @param amount_tokens - количество лексем int
+/// @param trait_array - массив лексем trait *
+/// @param amount_traits - количество лексем int
 /// @return
 /// 0 - OK;
 /// 1 - синтаксическая ошибка
 /// 2 - ошибка памяти
-int check_functions(token *token_array, const int amount_tokens) {
+int check_functions(trait *trait_array, const int amount_traits) {
   int output = OK;
-  if (token_array == NULL) {
+  if (trait_array == NULL) {
     output = MEMORY_ERROR;
   } else {
-    for (int i = 0; i < amount_tokens && output == OK; ++i) {
-      if (token_array[i].status == e_function_status && i != 0 &&
-          token_array[i - 1].status == e_operator_status &&
-          (token_array[i - 1].priority == e_right_bracket_priority ||
-           token_array[i - 1].priority == e_mod_priority)) {
+    for (int i = 0; i < amount_traits && output == OK; ++i) {
+      if (trait_array[i].status == e_function_status && i != 0 &&
+          trait_array[i - 1].status == e_operator_status &&
+          (trait_array[i - 1].priority == e_right_bracket_priority ||
+           trait_array[i - 1].priority == e_mod_priority)) {
         output = SYNTAX_ERROR;
       }
     }
