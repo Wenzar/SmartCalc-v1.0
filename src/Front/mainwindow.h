@@ -37,5 +37,6 @@ private slots:
     void on_pushButton_result_clicked();
     char *get_input_string();
     void set_result(const double result);
+    void on_pushButton_DEL_clicked();
 };
 #endif // MAINWINDOW_H

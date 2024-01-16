@@ -52,8 +52,8 @@ void MainWindow::on_pushButton_dot_clicked() {
 
 void MainWindow::function_button() {
   QPushButton *button = (QPushButton *)sender();
-  QString text_prev = ui->result_show->text();
-  ui->result_show->setText(text_prev + button->text() + '(');
+  QString prev_text = ui->result_show->text();
+  ui->result_show->setText(prev_text + button->text() + '(');
 }
 
 void MainWindow::operations() {
@@ -71,28 +71,28 @@ void MainWindow::on_pushButton_AC_clicked() { ui->result_show->clear(); }
 
 void MainWindow::on_Trigonometry_activated(int index) {
   if (index == 0) {
-    QString text_prev = ui->result_show->text();
-    ui->result_show->setText(text_prev + "cos(");
+    QString prev_text = ui->result_show->text();
+    ui->result_show->setText(prev_text + "cos(");
   }
   if (index == 1) {
-    QString text_prev = ui->result_show->text();
-    ui->result_show->setText(text_prev + "sin(");
+    QString prev_text = ui->result_show->text();
+    ui->result_show->setText(prev_text + "sin(");
   }
   if (index == 2) {
-    QString text_prev = ui->result_show->text();
-    ui->result_show->setText(text_prev + "tan(");
+    QString prev_text = ui->result_show->text();
+    ui->result_show->setText(prev_text + "tan(");
   }
   if (index == 3) {
-    QString text_prev = ui->result_show->text();
-    ui->result_show->setText(text_prev + "acos(");
+    QString prev_text = ui->result_show->text();
+    ui->result_show->setText(prev_text + "acos(");
   }
   if (index == 4) {
-    QString text_prev = ui->result_show->text();
-    ui->result_show->setText(text_prev + "asin(");
+    QString prev_text = ui->result_show->text();
+    ui->result_show->setText(prev_text + "asin(");
   }
   if (index == 5) {
-    QString text_prev = ui->result_show->text();
-    ui->result_show->setText(text_prev + "atan(");
+    QString prev_text = ui->result_show->text();
+    ui->result_show->setText(prev_text + "atan(");
   }
 }
 
@@ -146,4 +146,11 @@ void MainWindow::set_result(const double result) {
   } else {
     ui->result_show->setText(INVALID_DATA_LINE);
   }
+}
+
+void MainWindow::on_pushButton_DEL_clicked()
+{
+    QString prev_text = ui->result_show->text();
+    prev_text.remove(prev_text.size() - 1, 1);
+    ui->result_show->setText(prev_text);
 }
