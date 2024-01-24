@@ -272,6 +272,7 @@ Makefile: ../Front/SmartCalc.pro ../../../QT/5.14.2/mingw73_64/mkspecs/win32-g++
 		../../../QT/5.14.2/mingw73_64/mkspecs/features/yacc.prf \
 		../../../QT/5.14.2/mingw73_64/mkspecs/features/lex.prf \
 		../Front/SmartCalc.pro \
+		../../../QT/5.14.2/mingw73_64/lib/Qt5PrintSupport.prl \
 		../../../QT/5.14.2/mingw73_64/lib/Qt5Widgets.prl \
 		../../../QT/5.14.2/mingw73_64/lib/Qt5Gui.prl \
 		../../../QT/5.14.2/mingw73_64/lib/Qt5Core.prl \
@@ -481,6 +482,7 @@ Makefile: ../Front/SmartCalc.pro ../../../QT/5.14.2/mingw73_64/mkspecs/win32-g++
 ../../../QT/5.14.2/mingw73_64/mkspecs/features/yacc.prf:
 ../../../QT/5.14.2/mingw73_64/mkspecs/features/lex.prf:
 ../Front/SmartCalc.pro:
+../../../QT/5.14.2/mingw73_64/lib/Qt5PrintSupport.prl:
 ../../../QT/5.14.2/mingw73_64/lib/Qt5Widgets.prl:
 ../../../QT/5.14.2/mingw73_64/lib/Qt5Gui.prl:
 ../../../QT/5.14.2/mingw73_64/lib/Qt5Core.prl:
