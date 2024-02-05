@@ -1,4 +1,5 @@
 #include "mainwindow.h"
+
 #include "ui_mainwindow.h"
 
 double num_first;
@@ -17,6 +18,7 @@ MainWindow::MainWindow(QWidget *parent)
   connect(ui->pushButton_7, SIGNAL(clicked()), this, SLOT(digits_numbers()));
   connect(ui->pushButton_8, SIGNAL(clicked()), this, SLOT(digits_numbers()));
   connect(ui->pushButton_9, SIGNAL(clicked()), this, SLOT(digits_numbers()));
+  connect(ui->pushButton_x, SIGNAL(clicked()), this, SLOT(digits_numbers()));
   connect(ui->pushButton_plus, SIGNAL(clicked()), this, SLOT(digits_numbers()));
   connect(ui->pushButton_minus, SIGNAL(clicked()), this,
           SLOT(digits_numbers()));
@@ -102,12 +104,11 @@ void MainWindow::on_pushButton_result_clicked() {
   int output = input_string_validation(input_string);
   if (output == OK) {
     int amount_traits = 0;
-    trait *r_p_n_array =
-        reverse_polish_notation(input_string, &amount_traits);
+    trait *r_p_n_array = reverse_polish_notation(input_string, &amount_traits);
     if (r_p_n_array != nullptr) {
       double result = 0.0;
-      output = calculation(r_p_n_array, amount_traits,
-                          &result);
+      double x_value = get_x_value();
+      output = calculation(r_p_n_array, amount_traits, &result, x_value);
       if (output == OK) {
         set_result(result);
       }
@@ -148,9 +149,13 @@ void MainWindow::set_result(const double result) {
   }
 }
 
-void MainWindow::on_pushButton_DEL_clicked()
-{
-    QString prev_text = ui->result_show->text();
-    prev_text.remove(prev_text.size() - 1, 1);
-    ui->result_show->setText(prev_text);
+void MainWindow::on_pushButton_DEL_clicked() {
+  QString prev_text = ui->result_show->text();
+  prev_text.remove(prev_text.size() - 1, 1);
+  ui->result_show->setText(prev_text);
+}
+
+double MainWindow::get_x_value() {
+  double x_value = ui->x_value->text().toDouble();
+  return x_value;
 }

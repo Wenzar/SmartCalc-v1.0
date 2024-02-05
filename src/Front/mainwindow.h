@@ -38,5 +38,6 @@ private slots:
     char *get_input_string();
     void set_result(const double result);
     void on_pushButton_DEL_clicked();
+    double get_x_value();
 };
 #endif // MAINWINDOW_H

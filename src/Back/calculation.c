@@ -5,22 +5,22 @@
 /// @param amount_traits - количество лексем const int
 /// @param result - указатель на результат double *
 /// @return
-int calculation(trait *r_p_n_array, const int amount_traits, double *result) {
+int calculation(trait *r_p_n_array, const int amount_traits, double *result,
+                double x_value) {
   int output = OK;
   if (r_p_n_array == NULL || result == NULL) {
     output = MEMORY_ERROR;
   } else {
     *result = 0.0;
     stack_traits *stack_value = init_stack();
+    set_special_number(r_p_n_array, amount_traits, x_value);
     for (int i = 0; i < amount_traits && stack_value != NULL; ++i) {
       if (r_p_n_array[i].status == e_simple_number_status) {
         stack_value = push_trait(stack_value, r_p_n_array[i]);
       } else if (r_p_n_array[i].status == e_function_status) {
-        stack_value =
-            functions_workspace(r_p_n_array[i], stack_value);
+        stack_value = functions_workspace(r_p_n_array[i], stack_value);
       } else if (r_p_n_array[i].status == e_operator_status) {
-        stack_value =
-            operators_workspace(r_p_n_array[i], stack_value);
+        stack_value = operators_workspace(r_p_n_array[i], stack_value);
       }
     }
     if (stack_value != NULL && stack_value->size == 1) {
@@ -34,6 +34,17 @@ int calculation(trait *r_p_n_array, const int amount_traits, double *result) {
     }
   }
   return output;
+}
+
+void set_special_number(trait *r_p_n_array, int amount_traits, double x_value){
+    if (r_p_n_array != NULL) {
+        for (int i = 0; i < amount_traits; ++i) {
+          if (r_p_n_array[i].status == e_special_number_status) {
+            r_p_n_array[i].value = x_value;
+            r_p_n_array[i].status = e_simple_number_status;
+          }
+        }
+      }
 }
 
 /// @brief Обработка лексем-функций
@@ -142,7 +153,9 @@ double addition(double value_1, double value_2) { return value_1 + value_2; }
 double subtraction(double value_1, double value_2) { return value_1 - value_2; }
 
 /// @brief Умножение
-double multiplication(double value_1, double value_2) { return value_1 * value_2; }
+double multiplication(double value_1, double value_2) {
+  return value_1 * value_2;
+}
 
 /// @brief Деление
 double division(double value_1, double value_2) { return value_1 / value_2; }

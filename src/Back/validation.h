@@ -6,11 +6,11 @@
 #define NUMBER_OF_FUNCTIONS 3
 #define NAMES_OF_FUNCTIONS \
   check_number_of_braces, check_name_operators, check_points
-#define AMOUNT_TRIGONOMETRY_FUNCTIONS 10
-#define NAMES_TRIGONOMETRY_FUNCTIONS                                                       \
+#define AMOUNT_TRIGONOMETRY_FUNCTIONS 11
+#define NAMES_TRIGONOMETRY_FUNCTIONS                                          \
   {                                                                           \
     "mod", "cos(", "sin(", "tan(", "acos(", "asin(", "atan(", "sqrt(", "ln(", \
-        "log("                                                                \
+        "log(", "x"                                                           \
   }
 
 int input_string_validation(char *input_string);

@@ -15,7 +15,8 @@
 #define NAMES_trait_OPERATORS \
   { "+", "-", "*", "/", "^", "m" }
 
-int calculation(trait *r_p_n_array, const int amount_traits, double *result);
+int calculation(trait *r_p_n_array, const int amount_traits, double *result,
+                double x_value);
 stack_traits *functions_workspace(const trait trait_object,
                                   stack_traits *stack_value);
 double functions_selector(const char *name_function, const double value);
@@ -27,5 +28,6 @@ double addition(double value_1, double value_2);
 double subtraction(double value_1, double value_2);
 double multiplication(double value_1, double value_2);
 double division(double value_1, double value_2);
+void set_special_number(trait *r_p_n_array, int amount_traits, double x_value);
 
 #endif  // CALCULATION_H_
