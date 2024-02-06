@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include "qcustomplot.h" // the header file of QCustomPlot
 
 extern "C" {
 #include "../Back/general.h"
@@ -21,8 +22,10 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 
 public:
-    MainWindow(QWidget *parent = nullptr);
+    explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
+
+    void setupSimpleDemo(QCustomPlot *customPlot);
 
 private:
     Ui::MainWindow *ui;

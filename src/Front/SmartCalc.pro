@@ -15,6 +15,7 @@ SOURCES += \
     ../Back/calculation.c \
     main.cpp \
     mainwindow.cpp \
+    plot_graph.cpp \
     qcustomplot.cpp
 
 HEADERS += \
