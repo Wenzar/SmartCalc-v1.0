@@ -25,8 +25,6 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
-    void setupSimpleDemo(QCustomPlot *customPlot);
-
 private:
     Ui::MainWindow *ui;
 
@@ -42,5 +40,13 @@ private slots:
     void set_result(const double result);
     void on_pushButton_DEL_clicked();
     double get_x_value();
+
+    void on_plot_graph_clicked();
+    void check_definifion_value();
+    void set_default_definifion();
+    void set_definifion_value();
+    trait *copy_array(trait *input_array, int amount_traits);
+    void plot_graph(const QVector<double> x, const QVector<double> y);
+    void graph_settings(QCustomPlot *customPlot);
 };
 #endif // MAINWINDOW_H

@@ -35,13 +35,6 @@ MainWindow::MainWindow(QWidget *parent)
           SLOT(function_button()));
   connect(ui->pushButton_log, SIGNAL(clicked()), this, SLOT(function_button()));
   connect(ui->pushButton_ln, SIGNAL(clicked()), this, SLOT(function_button()));
-
-  //plot grafic
-//  setGeometry(400, 250, 542, 390);
-  setupSimpleDemo(ui->customPlot);
-  setWindowTitle("QCustomPlot");
-//  statusBar()->clearMessage();
-  ui->customPlot->replot();
 }
 
 MainWindow::~MainWindow() { delete ui; }
