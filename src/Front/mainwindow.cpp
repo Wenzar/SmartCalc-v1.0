@@ -2,7 +2,7 @@
 
 #include "ui_mainwindow.h"
 
-double num_first;
+//double num_first;
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent), ui(new Ui::MainWindow) {
@@ -35,9 +35,22 @@ MainWindow::MainWindow(QWidget *parent)
           SLOT(function_button()));
   connect(ui->pushButton_log, SIGNAL(clicked()), this, SLOT(function_button()));
   connect(ui->pushButton_ln, SIGNAL(clicked()), this, SLOT(function_button()));
+
+  start_settings();
 }
 
-MainWindow::~MainWindow() { delete ui; }
+void MainWindow::start_settings() {
+
+  set_validators();
+  ui->annuities->setChecked(true);
+//  QDate date_today = QDate::currentDate();
+//  ui->deposit_start_term->setDate(date_today);
+//  ui->deposit_date_replanishment->setDate(date_today);
+//  ui->deposit_date_withdraw->setDate(date_today);
+//  ui->deposit_procent_CB->setText(DEPOSIT_PROCENT_CB);
+}
+
+MainWindow::~MainWindow() { delete ui;}
 
 void MainWindow::digits_numbers() {
   QPushButton *button = (QPushButton *)sender();
@@ -159,3 +172,39 @@ double MainWindow::get_x_value() {
   double x_value = ui->x_value->text().toDouble();
   return x_value;
 }
+
+void MainWindow::set_validators() {
+  x_value_validator();
+  credit_calc_validator();
+//  set_deposit_calc_validator();
+}
+
+void MainWindow::x_value_validator() {
+  QRegularExpression regx("[-]?([0-9]*)[.]?[0-9]*");
+  QValidator *validator = new QRegularExpressionValidator(regx, this);
+  ui->x_value->setValidator(validator);
+}
+
+void MainWindow::credit_calc_validator() {
+  QRegularExpression re("[0-9]*");
+  QValidator *validator1 = new QRegularExpressionValidator(re, this);
+  ui->credit_sum->setValidator(validator1);
+  ui->loan_period->setValidator(validator1);
+  re.setPattern("[0-9]*[.]?[0-9]*");
+  QValidator *validator2 = new QRegularExpressionValidator(re, this);
+  ui->percentage_rate->setValidator(validator2);
+}
+
+//void MainWindow::set_deposit_calc_validator() {
+//  QRegularExpression regx("[0-9]*");
+//  QValidator *validator1 = new QRegularExpressionValidator(regx, this);
+//  ui->deposit_sum->setValidator(validator1);
+//  ui->deposit_term->setValidator(validator1);
+//  ui->deposit_sum_replanishment->setValidator(validator1);
+//  ui->deposit_sum_withdraw->setValidator(validator1);
+//  regx.setPattern("[0-9]*[.]?[0-9]*");
+//  QValidator *validator2 = new QRegularExpressionValidator(regx, this);
+//  ui->deposit_procent->setValidator(validator2);
+//  ui->deposit_procent_CB->setValidator(validator2);
+//}
+

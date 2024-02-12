@@ -13,6 +13,7 @@ SOURCES += \
     ../Back/reverse_polish_notation.c \
     ../Back/general.c \
     ../Back/calculation.c \
+    credit_calc.cpp \
     main.cpp \
     mainwindow.cpp \
     plot_graph.cpp \

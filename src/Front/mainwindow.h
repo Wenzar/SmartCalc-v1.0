@@ -4,6 +4,8 @@
 #include <QMainWindow>
 #include "qcustomplot.h" // the header file of QCustomPlot
 
+#define SIZE_BUFFER 255
+
 extern "C" {
 #include "../Back/general.h"
 #include "../Back/validation.h"
@@ -48,5 +50,22 @@ private slots:
     trait *copy_array(trait *input_array, int amount_traits);
     void plot_graph(const QVector<double> x, const QVector<double> y);
     void graph_settings(QCustomPlot *customPlot);
+    void on_pushButton_calculate_credit_clicked();
+    void clear_prev_calc();
+    void differentiated_calc(double credit_sum, const int loan_period,
+                                     const double percentage_rate);
+    void set_differentiated_result(const double start_payment,
+                                           const double end_payment,
+                                           const double overpayment,
+                                           const double payment_total);
+    void annuities_calc(double credit_sum, const int loan_period,
+                                   double percentage_rate);
+    void set_annuities_result(const double payment,
+                                         const double overpayment,
+                                         const double payment_total);
+    void x_value_validator();
+    void credit_calc_validator();
+    void start_settings();
+    void set_validators();
 };
 #endif // MAINWINDOW_H
