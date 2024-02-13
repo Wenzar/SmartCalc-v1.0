@@ -14,6 +14,7 @@ SOURCES += \
     ../Back/general.c \
     ../Back/calculation.c \
     credit_calc.cpp \
+    deposit_calc.cpp \
     main.cpp \
     mainwindow.cpp \
     plot_graph.cpp \

@@ -31,6 +31,16 @@ void MainWindow::clear_prev_calc() {
   ui->overpayment_loan->clear();
 }
 
+void MainWindow::credit_calc_validator() {
+  QRegularExpression re("[0-9]*");
+  QValidator *validator1 = new QRegularExpressionValidator(re, this);
+  ui->credit_sum->setValidator(validator1);
+  ui->loan_period->setValidator(validator1);
+  re.setPattern("[0-9]*[.]?[0-9]*");
+  QValidator *validator2 = new QRegularExpressionValidator(re, this);
+  ui->percentage_rate->setValidator(validator2);
+}
+
 void MainWindow::annuities_calc(double credit_sum, const int loan_period,
                                double percentage_rate) {
   percentage_rate /= 12;

@@ -40,14 +40,9 @@ MainWindow::MainWindow(QWidget *parent)
 }
 
 void MainWindow::start_settings() {
-
   set_validators();
   ui->annuities->setChecked(true);
-//  QDate date_today = QDate::currentDate();
-//  ui->deposit_start_term->setDate(date_today);
-//  ui->deposit_date_replanishment->setDate(date_today);
-//  ui->deposit_date_withdraw->setDate(date_today);
-//  ui->deposit_procent_CB->setText(DEPOSIT_PROCENT_CB);
+  set_today_date();
 }
 
 MainWindow::~MainWindow() { delete ui;}
@@ -61,7 +56,7 @@ void MainWindow::digits_numbers() {
 }
 
 void MainWindow::on_pushButton_dot_clicked() {
-  if (!(ui->result_show->text().contains('.')))
+  // if (!(ui->result_show->text().contains('.')))
     ui->result_show->setText(ui->result_show->text() + ".");
 }
 
@@ -176,7 +171,7 @@ double MainWindow::get_x_value() {
 void MainWindow::set_validators() {
   x_value_validator();
   credit_calc_validator();
-//  set_deposit_calc_validator();
+  deposit_calc_validator();
 }
 
 void MainWindow::x_value_validator() {
@@ -185,26 +180,4 @@ void MainWindow::x_value_validator() {
   ui->x_value->setValidator(validator);
 }
 
-void MainWindow::credit_calc_validator() {
-  QRegularExpression re("[0-9]*");
-  QValidator *validator1 = new QRegularExpressionValidator(re, this);
-  ui->credit_sum->setValidator(validator1);
-  ui->loan_period->setValidator(validator1);
-  re.setPattern("[0-9]*[.]?[0-9]*");
-  QValidator *validator2 = new QRegularExpressionValidator(re, this);
-  ui->percentage_rate->setValidator(validator2);
-}
-
-//void MainWindow::set_deposit_calc_validator() {
-//  QRegularExpression regx("[0-9]*");
-//  QValidator *validator1 = new QRegularExpressionValidator(regx, this);
-//  ui->deposit_sum->setValidator(validator1);
-//  ui->deposit_term->setValidator(validator1);
-//  ui->deposit_sum_replanishment->setValidator(validator1);
-//  ui->deposit_sum_withdraw->setValidator(validator1);
-//  regx.setPattern("[0-9]*[.]?[0-9]*");
-//  QValidator *validator2 = new QRegularExpressionValidator(regx, this);
-//  ui->deposit_procent->setValidator(validator2);
-//  ui->deposit_procent_CB->setValidator(validator2);
-//}
 

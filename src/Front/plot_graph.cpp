@@ -85,6 +85,7 @@ void MainWindow::plot_graph(const QVector<double> x, const QVector<double> y) {
 }
 
 void MainWindow::graph_settings(QCustomPlot *customPlot) {
+
     customPlot->addGraph();
     customPlot->graph(0)->setPen(
         QPen(Qt::blue));  // line color blue for first graph
