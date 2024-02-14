@@ -47,6 +47,12 @@
       <height>531</height>
      </rect>
     </property>
+    <property name="font">
+     <font>
+      <family>Segoe UI</family>
+      <pointsize>10</pointsize>
+     </font>
+    </property>
     <property name="currentIndex">
      <number>0</number>
     </property>
@@ -63,281 +69,22 @@
         <height>501</height>
        </rect>
       </property>
-      <layout class="QGridLayout" name="gridLayout" rowstretch="0,0,0,0,0,0,0" columnstretch="0,0,0,0,0,0,0,0,0,0">
+      <property name="font">
+       <font>
+        <family>Segoe UI</family>
+       </font>
+      </property>
+      <layout class="QGridLayout" name="gridLayout" rowstretch="0,0,0,0,0,0,0,0" columnstretch="0,0,0,0,0,0,0,0,0,0">
        <property name="spacing">
         <number>0</number>
        </property>
-       <item row="0" column="0" colspan="5">
-        <widget class="QLabel" name="result_show">
-         <property name="minimumSize">
-          <size>
-           <width>251</width>
-           <height>0</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>16777215</width>
-           <height>200000</height>
-          </size>
-         </property>
+       <item row="2" column="0">
+        <widget class="QComboBox" name="Trigonometry">
          <property name="font">
           <font>
-           <family>Times New Roman</family>
-           <pointsize>16</pointsize>
+           <family>Segoe UI</family>
           </font>
          </property>
-         <property name="styleSheet">
-          <string notr="true">QLabel {
-	qproperty-alignment: 'AlignVCenter | AlignRight';
-	border-bottom: 1px solid gray;
-}
-
-background-color : white;</string>
-         </property>
-         <property name="text">
-          <string/>
-         </property>
-         <property name="margin">
-          <number>0</number>
-         </property>
-        </widget>
-       </item>
-       <item row="4" column="2">
-        <widget class="QPushButton" name="pushButton_5">
-         <property name="text">
-          <string>5</string>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="1">
-        <widget class="QLabel" name="label_3">
-         <property name="layoutDirection">
-          <enum>Qt::LeftToRight</enum>
-         </property>
-         <property name="text">
-          <string>x=</string>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-         </property>
-        </widget>
-       </item>
-       <item row="2" column="4">
-        <widget class="QPushButton" name="pushButton_div">
-         <property name="text">
-          <string>/</string>
-         </property>
-        </widget>
-       </item>
-       <item row="4" column="0">
-        <widget class="QPushButton" name="pushButton_ln">
-         <property name="mouseTracking">
-          <bool>false</bool>
-         </property>
-         <property name="text">
-          <string>ln</string>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="3">
-        <widget class="QPushButton" name="pushButton_AC">
-         <property name="mouseTracking">
-          <bool>false</bool>
-         </property>
-         <property name="text">
-          <string>AC</string>
-         </property>
-        </widget>
-       </item>
-       <item row="2" column="3">
-        <widget class="QPushButton" name="pushButton_mod">
-         <property name="mouseTracking">
-          <bool>false</bool>
-         </property>
-         <property name="text">
-          <string>mod</string>
-         </property>
-        </widget>
-       </item>
-       <item row="6" column="4">
-        <widget class="QPushButton" name="pushButton_result">
-         <property name="mouseTracking">
-          <bool>false</bool>
-         </property>
-         <property name="text">
-          <string>=</string>
-         </property>
-        </widget>
-       </item>
-       <item row="5" column="4">
-        <widget class="QPushButton" name="pushButton_plus">
-         <property name="mouseTracking">
-          <bool>false</bool>
-         </property>
-         <property name="text">
-          <string>+</string>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="4">
-        <widget class="QPushButton" name="pushButton_DEL">
-         <property name="mouseTracking">
-          <bool>false</bool>
-         </property>
-         <property name="text">
-          <string>DEL</string>
-         </property>
-        </widget>
-       </item>
-       <item row="3" column="3">
-        <widget class="QPushButton" name="pushButton_9">
-         <property name="text">
-          <string>9</string>
-         </property>
-        </widget>
-       </item>
-       <item row="6" column="0">
-        <widget class="QPushButton" name="pushButton_x">
-         <property name="text">
-          <string>x</string>
-         </property>
-        </widget>
-       </item>
-       <item row="3" column="1">
-        <widget class="QPushButton" name="pushButton_7">
-         <property name="mouseTracking">
-          <bool>false</bool>
-         </property>
-         <property name="text">
-          <string>7</string>
-         </property>
-        </widget>
-       </item>
-       <item row="5" column="5">
-        <widget class="QLabel" name="label_2">
-         <property name="maximumSize">
-          <size>
-           <width>17</width>
-           <height>16777215</height>
-          </size>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="6" rowspan="5" colspan="4">
-        <widget class="QCustomPlot" name="customPlot" native="true">
-         <property name="minimumSize">
-          <size>
-           <width>400</width>
-           <height>350</height>
-          </size>
-         </property>
-        </widget>
-       </item>
-       <item row="6" column="9">
-        <widget class="QPushButton" name="plot_graph">
-         <property name="text">
-          <string>Построить график</string>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="2">
-        <widget class="QLineEdit" name="x_value">
-         <property name="maximumSize">
-          <size>
-           <width>75</width>
-           <height>16777215</height>
-          </size>
-         </property>
-        </widget>
-       </item>
-       <item row="3" column="2">
-        <widget class="QPushButton" name="pushButton_8">
-         <property name="text">
-          <string>8</string>
-         </property>
-        </widget>
-       </item>
-       <item row="6" column="8">
-        <widget class="QLabel" name="label_5">
-         <property name="text">
-          <string>TextLabel</string>
-         </property>
-        </widget>
-       </item>
-       <item row="5" column="0">
-        <widget class="QPushButton" name="pushButton_pow">
-         <property name="mouseTracking">
-          <bool>false</bool>
-         </property>
-         <property name="text">
-          <string>^</string>
-         </property>
-        </widget>
-       </item>
-       <item row="4" column="4">
-        <widget class="QPushButton" name="pushButton_minus">
-         <property name="text">
-          <string>-</string>
-         </property>
-        </widget>
-       </item>
-       <item row="2" column="1">
-        <widget class="QPushButton" name="pushButton_left_par">
-         <property name="mouseTracking">
-          <bool>false</bool>
-         </property>
-         <property name="text">
-          <string>(</string>
-         </property>
-        </widget>
-       </item>
-       <item row="3" column="0">
-        <widget class="QPushButton" name="pushButton_log">
-         <property name="mouseTracking">
-          <bool>false</bool>
-         </property>
-         <property name="text">
-          <string>log</string>
-         </property>
-        </widget>
-       </item>
-       <item row="6" column="1">
-        <widget class="QPushButton" name="pushButton_unar">
-         <property name="mouseTracking">
-          <bool>false</bool>
-         </property>
-         <property name="text">
-          <string>+/-</string>
-         </property>
-        </widget>
-       </item>
-       <item row="2" column="0">
-        <widget class="QPushButton" name="pushButton_sqrt">
-         <property name="text">
-          <string>sqrt</string>
-         </property>
-        </widget>
-       </item>
-       <item row="6" column="2">
-        <widget class="QPushButton" name="pushButton_0">
-         <property name="mouseTracking">
-          <bool>false</bool>
-         </property>
-         <property name="text">
-          <string>0</string>
-         </property>
-        </widget>
-       </item>
-       <item row="2" column="2">
-        <widget class="QPushButton" name="pushButton_right_par">
-         <property name="text">
-          <string>)</string>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="0">
-        <widget class="QComboBox" name="Trigonometry">
          <property name="contextMenuPolicy">
           <enum>Qt::DefaultContextMenu</enum>
          </property>
@@ -385,8 +132,106 @@ background-color : white;</string>
          </item>
         </widget>
        </item>
-       <item row="6" column="3">
+       <item row="6" column="1">
+        <widget class="QPushButton" name="pushButton_1">
+         <property name="font">
+          <font>
+           <family>Segoe UI</family>
+          </font>
+         </property>
+         <property name="mouseTracking">
+          <bool>false</bool>
+         </property>
+         <property name="text">
+          <string>1</string>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="1">
+        <widget class="QPushButton" name="pushButton_7">
+         <property name="font">
+          <font>
+           <family>Segoe UI</family>
+          </font>
+         </property>
+         <property name="mouseTracking">
+          <bool>false</bool>
+         </property>
+         <property name="text">
+          <string>7</string>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="4">
+        <widget class="QPushButton" name="pushButton_mul">
+         <property name="font">
+          <font>
+           <family>Segoe UI</family>
+          </font>
+         </property>
+         <property name="text">
+          <string>*</string>
+         </property>
+        </widget>
+       </item>
+       <item row="5" column="2">
+        <widget class="QPushButton" name="pushButton_5">
+         <property name="font">
+          <font>
+           <family>Segoe UI</family>
+          </font>
+         </property>
+         <property name="text">
+          <string>5</string>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="2">
+        <widget class="QPushButton" name="pushButton_8">
+         <property name="font">
+          <font>
+           <family>Segoe UI</family>
+          </font>
+         </property>
+         <property name="text">
+          <string>8</string>
+         </property>
+        </widget>
+       </item>
+       <item row="7" column="0">
+        <widget class="QPushButton" name="pushButton_x">
+         <property name="font">
+          <font>
+           <family>Segoe UI</family>
+          </font>
+         </property>
+         <property name="text">
+          <string>x</string>
+         </property>
+        </widget>
+       </item>
+       <item row="6" column="4">
+        <widget class="QPushButton" name="pushButton_plus">
+         <property name="font">
+          <font>
+           <family>Segoe UI</family>
+          </font>
+         </property>
+         <property name="mouseTracking">
+          <bool>false</bool>
+         </property>
+         <property name="text">
+          <string>+</string>
+         </property>
+        </widget>
+       </item>
+       <item row="7" column="3">
         <widget class="QPushButton" name="pushButton_dot">
+         <property name="font">
+          <font>
+           <family>Segoe UI</family>
+          </font>
+         </property>
          <property name="mouseTracking">
           <bool>false</bool>
          </property>
@@ -395,34 +240,23 @@ background-color : white;</string>
          </property>
         </widget>
        </item>
-       <item row="6" column="5">
-        <widget class="QLabel" name="label_6">
-         <property name="text">
-          <string>0x</string>
+       <item row="4" column="3">
+        <widget class="QPushButton" name="pushButton_9">
+         <property name="font">
+          <font>
+           <family>Segoe UI</family>
+          </font>
          </property>
-         <property name="alignment">
-          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         <property name="text">
+          <string>9</string>
          </property>
         </widget>
        </item>
-       <item row="5" column="3">
-        <widget class="QPushButton" name="pushButton_3">
-         <property name="text">
-          <string>3</string>
-         </property>
-        </widget>
-       </item>
-       <item row="3" column="4">
-        <widget class="QPushButton" name="pushButton_mul">
-         <property name="text">
-          <string>*</string>
-         </property>
-        </widget>
-       </item>
-       <item row="6" column="6">
+       <item row="7" column="6">
         <widget class="QSpinBox" name="scope_definifion_min">
          <property name="font">
           <font>
+           <family>Segoe UI</family>
            <pointsize>10</pointsize>
           </font>
          </property>
@@ -437,44 +271,164 @@ background-color : white;</string>
          </property>
         </widget>
        </item>
-       <item row="5" column="1">
-        <widget class="QPushButton" name="pushButton_1">
-         <property name="mouseTracking">
-          <bool>false</bool>
+       <item row="3" column="4">
+        <widget class="QPushButton" name="pushButton_div">
+         <property name="font">
+          <font>
+           <family>Segoe UI</family>
+          </font>
          </property>
          <property name="text">
-          <string>1</string>
+          <string>/</string>
          </property>
         </widget>
        </item>
-       <item row="4" column="1">
-        <widget class="QPushButton" name="pushButton_4">
-         <property name="mouseTracking">
-          <bool>false</bool>
+       <item row="2" column="1">
+        <widget class="QLabel" name="label_3">
+         <property name="font">
+          <font>
+           <family>Segoe UI</family>
+          </font>
+         </property>
+         <property name="layoutDirection">
+          <enum>Qt::LeftToRight</enum>
          </property>
          <property name="text">
-          <string>4</string>
+          <string>x=</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
          </property>
         </widget>
        </item>
-       <item row="5" column="2">
-        <widget class="QPushButton" name="pushButton_2">
+       <item row="5" column="4">
+        <widget class="QPushButton" name="pushButton_minus">
+         <property name="font">
+          <font>
+           <family>Segoe UI</family>
+          </font>
+         </property>
          <property name="text">
-          <string>2</string>
+          <string>-</string>
          </property>
         </widget>
        </item>
-       <item row="4" column="3">
+       <item row="5" column="3">
         <widget class="QPushButton" name="pushButton_6">
+         <property name="font">
+          <font>
+           <family>Segoe UI</family>
+          </font>
+         </property>
          <property name="text">
           <string>6</string>
          </property>
         </widget>
        </item>
-       <item row="6" column="7">
+       <item row="4" column="0">
+        <widget class="QPushButton" name="pushButton_log">
+         <property name="font">
+          <font>
+           <family>Segoe UI</family>
+          </font>
+         </property>
+         <property name="mouseTracking">
+          <bool>false</bool>
+         </property>
+         <property name="text">
+          <string>log</string>
+         </property>
+        </widget>
+       </item>
+       <item row="6" column="0">
+        <widget class="QPushButton" name="pushButton_pow">
+         <property name="font">
+          <font>
+           <family>Segoe UI</family>
+          </font>
+         </property>
+         <property name="mouseTracking">
+          <bool>false</bool>
+         </property>
+         <property name="text">
+          <string>^</string>
+         </property>
+        </widget>
+       </item>
+       <item row="5" column="0">
+        <widget class="QPushButton" name="pushButton_ln">
+         <property name="font">
+          <font>
+           <family>Segoe UI</family>
+          </font>
+         </property>
+         <property name="mouseTracking">
+          <bool>false</bool>
+         </property>
+         <property name="text">
+          <string>ln</string>
+         </property>
+        </widget>
+       </item>
+       <item row="7" column="8">
+        <widget class="QLabel" name="label_5">
+         <property name="font">
+          <font>
+           <family>Segoe UI</family>
+          </font>
+         </property>
+         <property name="text">
+          <string>TextLabel</string>
+         </property>
+        </widget>
+       </item>
+       <item row="6" column="5">
+        <widget class="QLabel" name="label_2">
+         <property name="maximumSize">
+          <size>
+           <width>17</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <family>Segoe UI</family>
+          </font>
+         </property>
+        </widget>
+       </item>
+       <item row="7" column="9">
+        <widget class="QPushButton" name="plot_graph">
+         <property name="font">
+          <font>
+           <family>Segoe UI</family>
+          </font>
+         </property>
+         <property name="text">
+          <string>Построить график</string>
+         </property>
+        </widget>
+       </item>
+       <item row="7" column="5">
+        <widget class="QLabel" name="label_6">
+         <property name="font">
+          <font>
+           <family>Segoe UI</family>
+          </font>
+         </property>
+         <property name="text">
+          <string>0x</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="7" column="7">
         <widget class="QSpinBox" name="scope_definifion_max">
          <property name="font">
           <font>
+           <family>Segoe UI</family>
            <pointsize>10</pointsize>
           </font>
          </property>
@@ -486,6 +440,248 @@ background-color : white;</string>
          </property>
          <property name="value">
           <number>10</number>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="2">
+        <widget class="QLineEdit" name="x_value">
+         <property name="maximumSize">
+          <size>
+           <width>75</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <family>Segoe UI</family>
+          </font>
+         </property>
+        </widget>
+       </item>
+       <item row="7" column="2">
+        <widget class="QPushButton" name="pushButton_0">
+         <property name="font">
+          <font>
+           <family>Segoe UI</family>
+          </font>
+         </property>
+         <property name="mouseTracking">
+          <bool>false</bool>
+         </property>
+         <property name="text">
+          <string>0</string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="3">
+        <widget class="QPushButton" name="pushButton_mod">
+         <property name="font">
+          <font>
+           <family>Segoe UI</family>
+          </font>
+         </property>
+         <property name="mouseTracking">
+          <bool>false</bool>
+         </property>
+         <property name="text">
+          <string>mod</string>
+         </property>
+        </widget>
+       </item>
+       <item row="6" column="3">
+        <widget class="QPushButton" name="pushButton_3">
+         <property name="font">
+          <font>
+           <family>Segoe UI</family>
+          </font>
+         </property>
+         <property name="text">
+          <string>3</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="4">
+        <widget class="QPushButton" name="pushButton_DEL">
+         <property name="font">
+          <font>
+           <family>Segoe UI</family>
+          </font>
+         </property>
+         <property name="mouseTracking">
+          <bool>false</bool>
+         </property>
+         <property name="text">
+          <string>DEL</string>
+         </property>
+        </widget>
+       </item>
+       <item row="7" column="1">
+        <widget class="QPushButton" name="pushButton_unar">
+         <property name="font">
+          <font>
+           <family>Segoe UI</family>
+          </font>
+         </property>
+         <property name="mouseTracking">
+          <bool>false</bool>
+         </property>
+         <property name="text">
+          <string>+/-</string>
+         </property>
+        </widget>
+       </item>
+       <item row="6" column="2">
+        <widget class="QPushButton" name="pushButton_2">
+         <property name="font">
+          <font>
+           <family>Segoe UI</family>
+          </font>
+         </property>
+         <property name="text">
+          <string>2</string>
+         </property>
+        </widget>
+       </item>
+       <item row="7" column="4">
+        <widget class="QPushButton" name="pushButton_result">
+         <property name="font">
+          <font>
+           <family>Segoe UI</family>
+          </font>
+         </property>
+         <property name="mouseTracking">
+          <bool>false</bool>
+         </property>
+         <property name="text">
+          <string>=</string>
+         </property>
+        </widget>
+       </item>
+       <item row="5" column="1">
+        <widget class="QPushButton" name="pushButton_4">
+         <property name="font">
+          <font>
+           <family>Segoe UI</family>
+          </font>
+         </property>
+         <property name="mouseTracking">
+          <bool>false</bool>
+         </property>
+         <property name="text">
+          <string>4</string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="0">
+        <widget class="QPushButton" name="pushButton_sqrt">
+         <property name="font">
+          <font>
+           <family>Segoe UI</family>
+          </font>
+         </property>
+         <property name="text">
+          <string>sqrt</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0" colspan="5">
+        <widget class="QLabel" name="result_show">
+         <property name="minimumSize">
+          <size>
+           <width>251</width>
+           <height>0</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>200000</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <family>Segoe UI</family>
+           <pointsize>16</pointsize>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QLabel {
+	qproperty-alignment: 'AlignVCenter | AlignRight';
+	border-bottom: 1px solid gray;
+	background-color : white;
+}
+
+</string>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="margin">
+          <number>0</number>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="3">
+        <widget class="QPushButton" name="pushButton_AC">
+         <property name="font">
+          <font>
+           <family>Segoe UI</family>
+          </font>
+         </property>
+         <property name="mouseTracking">
+          <bool>false</bool>
+         </property>
+         <property name="text">
+          <string>AC</string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="1">
+        <widget class="QPushButton" name="pushButton_left_par">
+         <property name="font">
+          <font>
+           <family>Segoe UI</family>
+          </font>
+         </property>
+         <property name="mouseTracking">
+          <bool>false</bool>
+         </property>
+         <property name="text">
+          <string>(</string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="2">
+        <widget class="QPushButton" name="pushButton_right_par">
+         <property name="font">
+          <font>
+           <family>Segoe UI</family>
+          </font>
+         </property>
+         <property name="text">
+          <string>)</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="6" rowspan="6" colspan="4">
+        <widget class="QCustomPlot" name="customPlot" native="true">
+         <property name="minimumSize">
+          <size>
+           <width>400</width>
+           <height>350</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <family>Segoe UI</family>
+          </font>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="0" colspan="5">
+        <widget class="QLabel" name="label_22">
+         <property name="text">
+          <string/>
          </property>
         </widget>
        </item>
@@ -505,6 +701,12 @@ background-color : white;</string>
         <height>501</height>
        </rect>
       </property>
+      <property name="font">
+       <font>
+        <family>Segoe UI</family>
+        <pointsize>11</pointsize>
+       </font>
+      </property>
       <layout class="QGridLayout" name="gridLayout_2" rowstretch="0,0,0,0,0,0,0,0,0,0,0,0,0">
        <property name="horizontalSpacing">
         <number>6</number>
@@ -519,8 +721,8 @@ background-color : white;</string>
          </property>
          <property name="font">
           <font>
-           <family>Times New Roman</family>
-           <pointsize>12</pointsize>
+           <family>Segoe UI</family>
+           <pointsize>11</pointsize>
           </font>
          </property>
         </widget>
@@ -535,8 +737,8 @@ background-color : white;</string>
          </property>
          <property name="font">
           <font>
-           <family>Times New Roman</family>
-           <pointsize>12</pointsize>
+           <family>Segoe UI</family>
+           <pointsize>11</pointsize>
           </font>
          </property>
         </widget>
@@ -557,8 +759,8 @@ background-color : white;</string>
          </property>
          <property name="font">
           <font>
-           <family>Times New Roman</family>
-           <pointsize>12</pointsize>
+           <family>Segoe UI</family>
+           <pointsize>11</pointsize>
            <weight>50</weight>
            <bold>false</bold>
            <kerning>true</kerning>
@@ -588,8 +790,8 @@ background-color : white;</string>
          </property>
          <property name="font">
           <font>
-           <family>Times New Roman</family>
-           <pointsize>12</pointsize>
+           <family>Segoe UI</family>
+           <pointsize>11</pointsize>
           </font>
          </property>
         </widget>
@@ -598,8 +800,8 @@ background-color : white;</string>
         <widget class="QLabel" name="label_10">
          <property name="font">
           <font>
-           <family>Times New Roman</family>
-           <pointsize>12</pointsize>
+           <family>Segoe UI</family>
+           <pointsize>11</pointsize>
           </font>
          </property>
          <property name="frameShadow">
@@ -620,8 +822,8 @@ background-color : white;</string>
         <widget class="QLabel" name="label_4">
          <property name="font">
           <font>
-           <family>Times New Roman</family>
-           <pointsize>12</pointsize>
+           <family>Segoe UI</family>
+           <pointsize>11</pointsize>
            <weight>50</weight>
            <bold>false</bold>
            <kerning>true</kerning>
@@ -645,8 +847,8 @@ background-color : white;</string>
         <widget class="QLabel" name="label_14">
          <property name="font">
           <font>
-           <family>Times New Roman</family>
-           <pointsize>12</pointsize>
+           <family>Segoe UI</family>
+           <pointsize>11</pointsize>
           </font>
          </property>
          <property name="text">
@@ -664,8 +866,8 @@ background-color : white;</string>
          </property>
          <property name="font">
           <font>
-           <family>Times New Roman</family>
-           <pointsize>12</pointsize>
+           <family>Segoe UI</family>
+           <pointsize>11</pointsize>
           </font>
          </property>
         </widget>
@@ -680,8 +882,8 @@ background-color : white;</string>
          </property>
          <property name="font">
           <font>
-           <family>Times New Roman</family>
-           <pointsize>13</pointsize>
+           <family>Segoe UI</family>
+           <pointsize>11</pointsize>
           </font>
          </property>
          <property name="text">
@@ -696,8 +898,8 @@ background-color : white;</string>
         <widget class="QLabel" name="label_9">
          <property name="font">
           <font>
-           <family>Times New Roman</family>
-           <pointsize>12</pointsize>
+           <family>Segoe UI</family>
+           <pointsize>11</pointsize>
           </font>
          </property>
          <property name="text">
@@ -712,8 +914,8 @@ background-color : white;</string>
         <widget class="QLabel" name="label_16">
          <property name="font">
           <font>
-           <family>Times New Roman</family>
-           <pointsize>12</pointsize>
+           <family>Segoe UI</family>
+           <pointsize>11</pointsize>
           </font>
          </property>
          <property name="text">
@@ -728,8 +930,8 @@ background-color : white;</string>
         <widget class="QLabel" name="label_12">
          <property name="font">
           <font>
-           <family>Times New Roman</family>
-           <pointsize>12</pointsize>
+           <family>Segoe UI</family>
+           <pointsize>11</pointsize>
           </font>
          </property>
          <property name="text">
@@ -747,8 +949,8 @@ background-color : white;</string>
          </property>
          <property name="font">
           <font>
-           <family>Times New Roman</family>
-           <pointsize>12</pointsize>
+           <family>Segoe UI</family>
+           <pointsize>11</pointsize>
           </font>
          </property>
         </widget>
@@ -763,8 +965,8 @@ background-color : white;</string>
          </property>
          <property name="font">
           <font>
-           <family>Times New Roman</family>
-           <pointsize>12</pointsize>
+           <family>Segoe UI</family>
+           <pointsize>11</pointsize>
           </font>
          </property>
          <property name="text">
@@ -791,8 +993,8 @@ background-color : white;</string>
          </property>
          <property name="font">
           <font>
-           <family>Times New Roman</family>
-           <pointsize>12</pointsize>
+           <family>Segoe UI</family>
+           <pointsize>11</pointsize>
            <weight>50</weight>
            <bold>false</bold>
            <kerning>true</kerning>
@@ -816,8 +1018,8 @@ background-color : white;</string>
         <widget class="QRadioButton" name="differentiated">
          <property name="font">
           <font>
-           <family>Times New Roman</family>
-           <pointsize>12</pointsize>
+           <family>Segoe UI</family>
+           <pointsize>11</pointsize>
           </font>
          </property>
          <property name="text">
@@ -835,8 +1037,8 @@ background-color : white;</string>
          </property>
          <property name="font">
           <font>
-           <family>Times New Roman</family>
-           <pointsize>12</pointsize>
+           <family>Segoe UI</family>
+           <pointsize>11</pointsize>
            <weight>50</weight>
            <bold>false</bold>
            <kerning>true</kerning>
@@ -866,8 +1068,8 @@ background-color : white;</string>
          </property>
          <property name="font">
           <font>
-           <family>Times New Roman</family>
-           <pointsize>12</pointsize>
+           <family>Segoe UI</family>
+           <pointsize>11</pointsize>
           </font>
          </property>
         </widget>
@@ -876,8 +1078,8 @@ background-color : white;</string>
         <widget class="QLabel" name="credit_error">
          <property name="font">
           <font>
-           <family>Times New Roman</family>
-           <pointsize>12</pointsize>
+           <family>Segoe UI</family>
+           <pointsize>11</pointsize>
            <weight>75</weight>
            <bold>true</bold>
           </font>
@@ -891,8 +1093,8 @@ background-color : white;</string>
         <widget class="QRadioButton" name="annuities">
          <property name="font">
           <font>
-           <family>Times New Roman</family>
-           <pointsize>12</pointsize>
+           <family>Segoe UI</family>
+           <pointsize>11</pointsize>
           </font>
          </property>
          <property name="text">
@@ -910,8 +1112,8 @@ background-color : white;</string>
          </property>
          <property name="font">
           <font>
-           <family>Times New Roman</family>
-           <pointsize>12</pointsize>
+           <family>Segoe UI</family>
+           <pointsize>11</pointsize>
           </font>
          </property>
          <property name="iconSize">
@@ -942,8 +1144,8 @@ background-color : white;</string>
          </property>
          <property name="font">
           <font>
-           <family>Times New Roman</family>
-           <pointsize>14</pointsize>
+           <family>Segoe UI</family>
+           <pointsize>11</pointsize>
            <weight>75</weight>
            <bold>true</bold>
           </font>
@@ -960,8 +1162,8 @@ background-color : white;</string>
         <widget class="QLabel" name="label_13">
          <property name="font">
           <font>
-           <family>Times New Roman</family>
-           <pointsize>12</pointsize>
+           <family>Segoe UI</family>
+           <pointsize>11</pointsize>
           </font>
          </property>
          <property name="text">
@@ -973,8 +1175,8 @@ background-color : white;</string>
         <widget class="QLabel" name="label_18">
          <property name="font">
           <font>
-           <family>Times New Roman</family>
-           <pointsize>12</pointsize>
+           <family>Segoe UI</family>
+           <pointsize>11</pointsize>
           </font>
          </property>
          <property name="text">
@@ -989,6 +1191,12 @@ background-color : white;</string>
            <width>175</width>
            <height>16777215</height>
           </size>
+         </property>
+         <property name="font">
+          <font>
+           <family>Segoe UI</family>
+           <pointsize>11</pointsize>
+          </font>
          </property>
          <property name="text">
           <string/>
@@ -1011,9 +1219,21 @@ background-color : white;</string>
         <height>501</height>
        </rect>
       </property>
+      <property name="font">
+       <font>
+        <family>Segoe UI</family>
+        <pointsize>10</pointsize>
+       </font>
+      </property>
       <layout class="QGridLayout" name="gridLayout_3">
        <item row="7" column="3">
         <widget class="QLineEdit" name="refill_sum">
+         <property name="font">
+          <font>
+           <family>Segoe UI</family>
+           <pointsize>10</pointsize>
+          </font>
+         </property>
          <property name="inputMask">
           <string/>
          </property>
@@ -1021,6 +1241,12 @@ background-color : white;</string>
        </item>
        <item row="8" column="1">
         <widget class="QComboBox" name="withdrawal_frequency">
+         <property name="font">
+          <font>
+           <family>Segoe UI</family>
+           <pointsize>10</pointsize>
+          </font>
+         </property>
          <item>
           <property name="text">
            <string>Разовое</string>
@@ -1055,20 +1281,33 @@ background-color : white;</string>
        </item>
        <item row="5" column="0">
         <widget class="QLabel" name="label_24">
+         <property name="font">
+          <font>
+           <family>Segoe UI</family>
+           <pointsize>10</pointsize>
+          </font>
+         </property>
          <property name="text">
           <string>Периодичность выплат</string>
          </property>
         </widget>
        </item>
        <item row="8" column="3">
-        <widget class="QLineEdit" name="withdrawal_sum"/>
+        <widget class="QLineEdit" name="withdrawal_sum">
+         <property name="font">
+          <font>
+           <family>Segoe UI</family>
+           <pointsize>10</pointsize>
+          </font>
+         </property>
+        </widget>
        </item>
        <item row="0" column="0">
         <widget class="QLabel" name="label_19">
          <property name="font">
           <font>
-           <family>Times New Roman</family>
-           <pointsize>12</pointsize>
+           <family>Segoe UI</family>
+           <pointsize>10</pointsize>
           </font>
          </property>
          <property name="text">
@@ -1078,6 +1317,12 @@ background-color : white;</string>
        </item>
        <item row="1" column="2">
         <widget class="QComboBox" name="period_placement_type">
+         <property name="font">
+          <font>
+           <family>Segoe UI</family>
+           <pointsize>10</pointsize>
+          </font>
+         </property>
          <item>
           <property name="text">
            <string>Дней</string>
@@ -1097,6 +1342,12 @@ background-color : white;</string>
        </item>
        <item row="6" column="0">
         <widget class="QLabel" name="label_25">
+         <property name="font">
+          <font>
+           <family>Segoe UI</family>
+           <pointsize>10</pointsize>
+          </font>
+         </property>
          <property name="text">
           <string>Капитализация процентов</string>
          </property>
@@ -1106,24 +1357,43 @@ background-color : white;</string>
         <widget class="QDateEdit" name="beginning_term">
          <property name="font">
           <font>
-           <family>Times New Roman</family>
-           <pointsize>12</pointsize>
+           <family>Segoe UI</family>
+           <pointsize>10</pointsize>
           </font>
          </property>
         </widget>
        </item>
        <item row="3" column="0">
         <widget class="QLabel" name="label228">
+         <property name="font">
+          <font>
+           <family>Segoe UI</family>
+           <pointsize>10</pointsize>
+          </font>
+         </property>
          <property name="text">
           <string>Процентная ставка</string>
          </property>
         </widget>
        </item>
        <item row="4" column="1">
-        <widget class="QLineEdit" name="central_bank_rate"/>
+        <widget class="QLineEdit" name="central_bank_rate">
+         <property name="font">
+          <font>
+           <family>Segoe UI</family>
+           <pointsize>10</pointsize>
+          </font>
+         </property>
+        </widget>
        </item>
        <item row="7" column="1">
         <widget class="QComboBox" name="refill_frequency">
+         <property name="font">
+          <font>
+           <family>Segoe UI</family>
+           <pointsize>10</pointsize>
+          </font>
+         </property>
          <item>
           <property name="text">
            <string>Разовое</string>
@@ -1160,8 +1430,8 @@ background-color : white;</string>
         <widget class="QLabel" name="label_20">
          <property name="font">
           <font>
-           <family>Times New Roman</family>
-           <pointsize>12</pointsize>
+           <family>Segoe UI</family>
+           <pointsize>10</pointsize>
           </font>
          </property>
          <property name="text">
@@ -1170,10 +1440,23 @@ background-color : white;</string>
         </widget>
        </item>
        <item row="7" column="2">
-        <widget class="QDateEdit" name="refill_date"/>
+        <widget class="QDateEdit" name="refill_date">
+         <property name="font">
+          <font>
+           <family>Segoe UI</family>
+           <pointsize>10</pointsize>
+          </font>
+         </property>
+        </widget>
        </item>
        <item row="7" column="0">
         <widget class="QLabel" name="label_26">
+         <property name="font">
+          <font>
+           <family>Segoe UI</family>
+           <pointsize>10</pointsize>
+          </font>
+         </property>
          <property name="text">
           <string>Пополнение</string>
          </property>
@@ -1183,8 +1466,8 @@ background-color : white;</string>
         <widget class="QLabel" name="label_21">
          <property name="font">
           <font>
-           <family>Times New Roman</family>
-           <pointsize>12</pointsize>
+           <family>Segoe UI</family>
+           <pointsize>10</pointsize>
           </font>
          </property>
          <property name="text">
@@ -1193,20 +1476,46 @@ background-color : white;</string>
         </widget>
        </item>
        <item row="3" column="1">
-        <widget class="QLineEdit" name="percentage_rate_dep"/>
+        <widget class="QLineEdit" name="percentage_rate_dep">
+         <property name="font">
+          <font>
+           <family>Segoe UI</family>
+           <pointsize>10</pointsize>
+          </font>
+         </property>
+        </widget>
        </item>
        <item row="0" column="4">
         <widget class="QLabel" name="label_29">
+         <property name="font">
+          <font>
+           <family>Segoe UI</family>
+           <pointsize>10</pointsize>
+          </font>
+         </property>
          <property name="text">
           <string/>
          </property>
         </widget>
        </item>
        <item row="0" column="1">
-        <widget class="QLineEdit" name="deposit_sum"/>
+        <widget class="QLineEdit" name="deposit_sum">
+         <property name="font">
+          <font>
+           <family>Segoe UI</family>
+           <pointsize>10</pointsize>
+          </font>
+         </property>
+        </widget>
        </item>
        <item row="6" column="1">
         <widget class="QCheckBox" name="capitalization_of_percents">
+         <property name="font">
+          <font>
+           <family>Segoe UI</family>
+           <pointsize>10</pointsize>
+          </font>
+         </property>
          <property name="text">
           <string/>
          </property>
@@ -1214,6 +1523,12 @@ background-color : white;</string>
        </item>
        <item row="5" column="1">
         <widget class="QComboBox" name="frequency_of_payments">
+         <property name="font">
+          <font>
+           <family>Segoe UI</family>
+           <pointsize>10</pointsize>
+          </font>
+         </property>
          <item>
           <property name="text">
            <string>Каждый день</string>
@@ -1252,20 +1567,46 @@ background-color : white;</string>
         </widget>
        </item>
        <item row="1" column="1">
-        <widget class="QLineEdit" name="period_placement"/>
+        <widget class="QLineEdit" name="period_placement">
+         <property name="font">
+          <font>
+           <family>Segoe UI</family>
+           <pointsize>10</pointsize>
+          </font>
+         </property>
+        </widget>
        </item>
        <item row="8" column="0">
         <widget class="QLabel" name="label_27">
+         <property name="font">
+          <font>
+           <family>Segoe UI</family>
+           <pointsize>10</pointsize>
+          </font>
+         </property>
          <property name="text">
           <string>Снятие</string>
          </property>
         </widget>
        </item>
        <item row="8" column="2">
-        <widget class="QDateEdit" name="withdrawal_date"/>
+        <widget class="QDateEdit" name="withdrawal_date">
+         <property name="font">
+          <font>
+           <family>Segoe UI</family>
+           <pointsize>10</pointsize>
+          </font>
+         </property>
+        </widget>
        </item>
        <item row="4" column="0">
         <widget class="QLabel" name="label_23">
+         <property name="font">
+          <font>
+           <family>Segoe UI</family>
+           <pointsize>10</pointsize>
+          </font>
+         </property>
          <property name="text">
           <string>Ключевая ставка ЦБ</string>
          </property>
@@ -1273,6 +1614,12 @@ background-color : white;</string>
        </item>
        <item row="4" column="5">
         <widget class="QLabel" name="label_33">
+         <property name="font">
+          <font>
+           <family>Segoe UI</family>
+           <pointsize>10</pointsize>
+          </font>
+         </property>
          <property name="text">
           <string>Доход за вычетом налогов</string>
          </property>
@@ -1280,6 +1627,12 @@ background-color : white;</string>
        </item>
        <item row="3" column="5">
         <widget class="QLabel" name="label_32">
+         <property name="font">
+          <font>
+           <family>Segoe UI</family>
+           <pointsize>10</pointsize>
+          </font>
+         </property>
          <property name="text">
           <string>Налог</string>
          </property>
@@ -1287,6 +1640,12 @@ background-color : white;</string>
        </item>
        <item row="2" column="5">
         <widget class="QLabel" name="label_31">
+         <property name="font">
+          <font>
+           <family>Segoe UI</family>
+           <pointsize>10</pointsize>
+          </font>
+         </property>
          <property name="text">
           <string>Сумма вклада с процентами</string>
          </property>
@@ -1294,25 +1653,65 @@ background-color : white;</string>
        </item>
        <item row="1" column="5">
         <widget class="QLabel" name="label_30">
+         <property name="font">
+          <font>
+           <family>Segoe UI</family>
+           <pointsize>10</pointsize>
+          </font>
+         </property>
          <property name="text">
           <string>Начисленные проценты</string>
          </property>
         </widget>
        </item>
        <item row="4" column="6">
-        <widget class="QLineEdit" name="income_after_taxes"/>
+        <widget class="QLineEdit" name="income_after_taxes">
+         <property name="font">
+          <font>
+           <family>Segoe UI</family>
+           <pointsize>10</pointsize>
+          </font>
+         </property>
+        </widget>
        </item>
        <item row="3" column="6">
-        <widget class="QLineEdit" name="tax"/>
+        <widget class="QLineEdit" name="tax">
+         <property name="font">
+          <font>
+           <family>Segoe UI</family>
+           <pointsize>10</pointsize>
+          </font>
+         </property>
+        </widget>
        </item>
        <item row="2" column="6">
-        <widget class="QLineEdit" name="deposit_amount_with_interest"/>
+        <widget class="QLineEdit" name="deposit_amount_with_interest">
+         <property name="font">
+          <font>
+           <family>Segoe UI</family>
+           <pointsize>10</pointsize>
+          </font>
+         </property>
+        </widget>
        </item>
        <item row="1" column="6">
-        <widget class="QLineEdit" name="accrued_interest"/>
+        <widget class="QLineEdit" name="accrued_interest">
+         <property name="font">
+          <font>
+           <family>Segoe UI</family>
+           <pointsize>10</pointsize>
+          </font>
+         </property>
+        </widget>
        </item>
        <item row="0" column="5" colspan="2">
         <widget class="QLabel" name="label_28">
+         <property name="font">
+          <font>
+           <family>Segoe UI</family>
+           <pointsize>10</pointsize>
+          </font>
+         </property>
          <property name="text">
           <string>Результат</string>
          </property>
@@ -1323,6 +1722,12 @@ background-color : white;</string>
        </item>
        <item row="5" column="5" rowspan="2" colspan="2">
         <widget class="QPushButton" name="pushButton_calculate_deposit">
+         <property name="font">
+          <font>
+           <family>Segoe UI</family>
+           <pointsize>10</pointsize>
+          </font>
+         </property>
          <property name="text">
           <string>Рассчитать</string>
          </property>
@@ -1332,8 +1737,8 @@ background-color : white;</string>
         <widget class="QLabel" name="label_34">
          <property name="font">
           <font>
-           <family>Times New Roman</family>
-           <pointsize>12</pointsize>
+           <family>Segoe UI</family>
+           <pointsize>10</pointsize>
           </font>
          </property>
          <property name="text">
@@ -1345,8 +1750,8 @@ background-color : white;</string>
         <widget class="QLabel" name="label_35">
          <property name="font">
           <font>
-           <family>Times New Roman</family>
-           <pointsize>12</pointsize>
+           <family>Segoe UI</family>
+           <pointsize>10</pointsize>
           </font>
          </property>
          <property name="text">
@@ -1358,8 +1763,8 @@ background-color : white;</string>
         <widget class="QLabel" name="label_36">
          <property name="font">
           <font>
-           <family>Times New Roman</family>
-           <pointsize>12</pointsize>
+           <family>Segoe UI</family>
+           <pointsize>10</pointsize>
           </font>
          </property>
          <property name="text">
@@ -1369,6 +1774,12 @@ background-color : white;</string>
        </item>
        <item row="5" column="3" rowspan="2" colspan="2">
         <widget class="QLabel" name="deposit_error">
+         <property name="font">
+          <font>
+           <family>Segoe UI</family>
+           <pointsize>10</pointsize>
+          </font>
+         </property>
          <property name="text">
           <string/>
          </property>

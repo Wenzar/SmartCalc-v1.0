@@ -1,0 +1,12 @@
+release/validation.o
+release/reverse_polish_notation.o
+release/general.o
+release/calculation.o
+release/credit_calc.o
+release/deposit_calc.o
+release/main.o
+release/mainwindow.o
+release/plot_graph.o
+release/qcustomplot.o
+release/moc_mainwindow.o
+release/moc_qcustomplot.o
