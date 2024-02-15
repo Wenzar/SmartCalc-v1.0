@@ -378,7 +378,7 @@
           </font>
          </property>
          <property name="text">
-          <string>TextLabel</string>
+          <string/>
          </property>
         </widget>
        </item>
@@ -1290,6 +1290,9 @@
          <property name="text">
           <string>Периодичность выплат</string>
          </property>
+         <property name="margin">
+          <number>5</number>
+         </property>
         </widget>
        </item>
        <item row="8" column="3">
@@ -1312,6 +1315,9 @@
          </property>
          <property name="text">
           <string>Сумма вклада</string>
+         </property>
+         <property name="margin">
+          <number>5</number>
          </property>
         </widget>
        </item>
@@ -1351,6 +1357,9 @@
          <property name="text">
           <string>Капитализация процентов</string>
          </property>
+         <property name="margin">
+          <number>5</number>
+         </property>
         </widget>
        </item>
        <item row="2" column="1">
@@ -1373,6 +1382,9 @@
          </property>
          <property name="text">
           <string>Процентная ставка</string>
+         </property>
+         <property name="margin">
+          <number>5</number>
          </property>
         </widget>
        </item>
@@ -1437,6 +1449,9 @@
          <property name="text">
           <string>Срок размещения</string>
          </property>
+         <property name="margin">
+          <number>5</number>
+         </property>
         </widget>
        </item>
        <item row="7" column="2">
@@ -1460,6 +1475,9 @@
          <property name="text">
           <string>Пополнение</string>
          </property>
+         <property name="margin">
+          <number>5</number>
+         </property>
         </widget>
        </item>
        <item row="2" column="0">
@@ -1472,6 +1490,9 @@
          </property>
          <property name="text">
           <string>Начало срока</string>
+         </property>
+         <property name="margin">
+          <number>5</number>
          </property>
         </widget>
        </item>
@@ -1587,6 +1608,9 @@
          <property name="text">
           <string>Снятие</string>
          </property>
+         <property name="margin">
+          <number>5</number>
+         </property>
         </widget>
        </item>
        <item row="8" column="2">
@@ -1609,6 +1633,9 @@
          </property>
          <property name="text">
           <string>Ключевая ставка ЦБ</string>
+         </property>
+         <property name="margin">
+          <number>5</number>
          </property>
         </widget>
        </item>

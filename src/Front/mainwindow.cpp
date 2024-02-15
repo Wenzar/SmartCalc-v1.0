@@ -37,7 +37,7 @@ MainWindow::MainWindow(QWidget *parent)
   connect(ui->pushButton_ln, SIGNAL(clicked()), this, SLOT(function_button()));
 
   start_settings();
-  ui->label_22->setStyleSheet("border-image: url(F:/Download/Maxim/Programming/Ci/C7_SmartCalc_v1.0-1/src/images/756341708204944.jpg);");
+  ui->label_22->setStyleSheet("border-image: url(../images/draw_text.png);");
 }
 
 void MainWindow::start_settings() {
