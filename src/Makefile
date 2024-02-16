@@ -54,7 +54,7 @@ gcov_report: test
 	@rm -f $(TEST_DIR)/*.gc*
 
 install: uninstall
-	@mkdir $(INSTALL_DIR)
+	@mkdir -p $(INSTALL_DIR)
 	@cd ./Front && qmake SmartCalc.pro -o ../$(INSTALL_DIR)/Makefile && make -C ../$(INSTALL_DIR)/
 	@chmod +rwx $(INSTALL_DIR)
 	@chmod +rwx $(INSTALL_DIR)/$(APP)
