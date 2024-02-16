@@ -36,15 +36,15 @@ int calculation(trait *r_p_n_array, const int amount_traits, double *result,
   return output;
 }
 
-void set_special_number(trait *r_p_n_array, int amount_traits, double x_value){
-    if (r_p_n_array != NULL) {
-        for (int i = 0; i < amount_traits; ++i) {
-          if (r_p_n_array[i].status == e_special_number_status) {
-            r_p_n_array[i].value = x_value;
-            r_p_n_array[i].status = e_simple_number_status;
-          }
-        }
+void set_special_number(trait *r_p_n_array, int amount_traits, double x_value) {
+  if (r_p_n_array != NULL) {
+    for (int i = 0; i < amount_traits; ++i) {
+      if (r_p_n_array[i].status == e_special_number_status) {
+        r_p_n_array[i].value = x_value;
+        r_p_n_array[i].status = e_simple_number_status;
       }
+    }
+  }
 }
 
 /// @brief Обработка лексем-функций

@@ -1,6 +1,6 @@
 #include "validation.h"
 
-/// @brief Валидация вводимой строки 
+/// @brief Валидация вводимой строки
 int input_string_validation(char *input_string) {
   int output = OK;
   if (input_string == NULL) {
@@ -83,7 +83,8 @@ int compare_function_name(char *potential_function) {
     output = MEMORY_ERROR;
   } else {
     int match = 1;
-    const char trigonometry_name[AMOUNT_TRIGONOMETRY_FUNCTIONS][10] = NAMES_TRIGONOMETRY_FUNCTIONS;
+    const char trigonometry_name[AMOUNT_TRIGONOMETRY_FUNCTIONS][10] =
+        NAMES_TRIGONOMETRY_FUNCTIONS;
     for (int i = 0; i < AMOUNT_TRIGONOMETRY_FUNCTIONS && match; i++) {
       match = strcmp(potential_function, trigonometry_name[i]);
     }

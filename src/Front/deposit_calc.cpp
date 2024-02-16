@@ -193,36 +193,36 @@ void MainWindow::procent_calculation(const double deposit_sum, const QDate date,
   *total_sum_procent += daily_procent;
 }
 
- void MainWindow::tax_calculation(double *sum_tax, double *sum_procent_of_year) {
-   double central_bank_rate = ui->central_bank_rate->text().toDouble() /
-   100; double sum_tax_free = TAX_CALCULATION_SUM * central_bank_rate; if
-   (*sum_procent_of_year > sum_tax_free) {
-     *sum_tax += (*sum_procent_of_year - sum_tax_free) * TAX / 100;
-   }
-   *sum_procent_of_year = 0.0;
- }
-
- void MainWindow::set_deposit_result(const double total_sum_procent,
-                                     const double sum_tax,
-                                     const double deposit_sum) {
-   char result_str[SIZE_BUFFER] = {'\0'};
-   setlocale(LC_NUMERIC, "C");
-   sprintf(result_str, "%.2f", total_sum_procent);
-   ui->accrued_interest->setText(result_str);
-   memset(result_str, '\0', SIZE_BUFFER);
-   sprintf(result_str, "%.2f", sum_tax);
-   ui->tax->setText(result_str);
-   memset(result_str, '\0', SIZE_BUFFER);
-   sprintf(result_str, "%.2f", deposit_sum);
-   ui->deposit_amount_with_interest->setText(result_str);
-   memset(result_str, '\0', SIZE_BUFFER);
-   sprintf(result_str, "%.2f", total_sum_procent - sum_tax);
-   ui->income_after_taxes->setText(result_str);
- }
-
-  void MainWindow::set_today_date() {
-    QDate date_today = QDate::currentDate();
-      ui->beginning_term->setDate(date_today);
-      ui->refill_date->setDate(date_today);
-      ui->withdrawal_date->setDate(date_today);
+void MainWindow::tax_calculation(double *sum_tax, double *sum_procent_of_year) {
+  double central_bank_rate = ui->central_bank_rate->text().toDouble() / 100;
+  double sum_tax_free = TAX_CALCULATION_SUM * central_bank_rate;
+  if (*sum_procent_of_year > sum_tax_free) {
+    *sum_tax += (*sum_procent_of_year - sum_tax_free) * TAX / 100;
   }
+  *sum_procent_of_year = 0.0;
+}
+
+void MainWindow::set_deposit_result(const double total_sum_procent,
+                                    const double sum_tax,
+                                    const double deposit_sum) {
+  char result_str[SIZE_BUFFER] = {'\0'};
+  setlocale(LC_NUMERIC, "C");
+  sprintf(result_str, "%.2f", total_sum_procent);
+  ui->accrued_interest->setText(result_str);
+  memset(result_str, '\0', SIZE_BUFFER);
+  sprintf(result_str, "%.2f", sum_tax);
+  ui->tax->setText(result_str);
+  memset(result_str, '\0', SIZE_BUFFER);
+  sprintf(result_str, "%.2f", deposit_sum);
+  ui->deposit_amount_with_interest->setText(result_str);
+  memset(result_str, '\0', SIZE_BUFFER);
+  sprintf(result_str, "%.2f", total_sum_procent - sum_tax);
+  ui->income_after_taxes->setText(result_str);
+}
+
+void MainWindow::set_today_date() {
+  QDate date_today = QDate::currentDate();
+  ui->beginning_term->setDate(date_today);
+  ui->refill_date->setDate(date_today);
+  ui->withdrawal_date->setDate(date_today);
+}

@@ -1,27 +1,26 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
-void MainWindow::on_pushButton_calculate_credit_clicked()
-{
-    clear_prev_calc();
-    double credit_sum = ui->credit_sum->text().toDouble();
-    int loan_period = ui->loan_period->text().toInt();
-    double percentage_rate = ui->percentage_rate->text().toDouble();
-    if (credit_sum != 0 && loan_period != 0 && percentage_rate != 0) {
-      int period_type = ui->credit_period_choice->currentIndex();
-      if (!period_type) {
-        loan_period *= 12;
-      }
-      percentage_rate /= 100;
-      bool type_payment = ui->differentiated->isChecked();
-      if (type_payment) {
-        differentiated_calc(credit_sum, loan_period, percentage_rate);
-      } else {
-        annuities_calc(credit_sum, loan_period, percentage_rate);
-      }
-    } else {
-      ui->credit_error->setText(INVALID_DATA_LINE);
+void MainWindow::on_pushButton_calculate_credit_clicked() {
+  clear_prev_calc();
+  double credit_sum = ui->credit_sum->text().toDouble();
+  int loan_period = ui->loan_period->text().toInt();
+  double percentage_rate = ui->percentage_rate->text().toDouble();
+  if (credit_sum != 0 && loan_period != 0 && percentage_rate != 0) {
+    int period_type = ui->credit_period_choice->currentIndex();
+    if (!period_type) {
+      loan_period *= 12;
     }
+    percentage_rate /= 100;
+    bool type_payment = ui->differentiated->isChecked();
+    if (type_payment) {
+      differentiated_calc(credit_sum, loan_period, percentage_rate);
+    } else {
+      annuities_calc(credit_sum, loan_period, percentage_rate);
+    }
+  } else {
+    ui->credit_error->setText(INVALID_DATA_LINE);
+  }
 }
 
 void MainWindow::clear_prev_calc() {
@@ -42,17 +41,18 @@ void MainWindow::credit_calc_validator() {
 }
 
 void MainWindow::annuities_calc(double credit_sum, const int loan_period,
-                               double percentage_rate) {
+                                double percentage_rate) {
   percentage_rate /= 12;
-  double payment = credit_sum * percentage_rate / (1 - pow(1 + percentage_rate, -loan_period));
+  double payment = credit_sum * percentage_rate /
+                   (1 - pow(1 + percentage_rate, -loan_period));
   double payment_total = payment * loan_period;
   double overpayment = payment_total - credit_sum;
   set_annuities_result(payment, overpayment, payment_total);
 }
 
 void MainWindow::set_annuities_result(const double payment,
-                                     const double overpayment,
-                                     const double payment_total) {
+                                      const double overpayment,
+                                      const double payment_total) {
   char result_str[SIZE_BUFFER] = {'\0'};
   setlocale(LC_NUMERIC, "C");
   sprintf(result_str, "%.2f", payment);
@@ -66,7 +66,7 @@ void MainWindow::set_annuities_result(const double payment,
 }
 
 void MainWindow::differentiated_calc(double credit_sum, const int loan_period,
-                                 const double percentage_rate) {
+                                     const double percentage_rate) {
   QDate date_start_term = QDate::currentDate();
   double start_payment = 0.0;
   double end_payment = 0.0;
@@ -77,7 +77,8 @@ void MainWindow::differentiated_calc(double credit_sum, const int loan_period,
   double overpayment = -credit_sum;
   for (int i = 0; i < loan_period; ++i, credit_sum -= principal_payment,
            date_start_term = date_start_term.addMonths(1)) {
-    procent_payment = credit_sum * percentage_rate * date_start_term.daysInMonth() /
+    procent_payment = credit_sum * percentage_rate *
+                      date_start_term.daysInMonth() /
                       date_start_term.daysInYear();
     payment = principal_payment + procent_payment;
     if (i == 0) {
@@ -92,14 +93,14 @@ void MainWindow::differentiated_calc(double credit_sum, const int loan_period,
     set_annuities_result(start_payment, overpayment, total_payment);
   } else {
     set_differentiated_result(start_payment, end_payment, overpayment,
-                          total_payment);
+                              total_payment);
   }
 }
 
 void MainWindow::set_differentiated_result(const double start_payment,
-                                       const double end_payment,
-                                       const double overpayment,
-                                       const double payment_total) {
+                                           const double end_payment,
+                                           const double overpayment,
+                                           const double payment_total) {
   char result_str[SIZE_BUFFER] = {'\0'};
   setlocale(LC_NUMERIC, "C");
   sprintf(result_str, "%.2f", start_payment);

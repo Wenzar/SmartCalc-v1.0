@@ -2,7 +2,7 @@
 
 #include "ui_mainwindow.h"
 
-//double num_first;
+// double num_first;
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent), ui(new Ui::MainWindow) {
@@ -46,7 +46,7 @@ void MainWindow::start_settings() {
   set_today_date();
 }
 
-MainWindow::~MainWindow() { delete ui;}
+MainWindow::~MainWindow() { delete ui; }
 
 void MainWindow::digits_numbers() {
   QPushButton *button = (QPushButton *)sender();
@@ -58,7 +58,7 @@ void MainWindow::digits_numbers() {
 
 void MainWindow::on_pushButton_dot_clicked() {
   // if (!(ui->result_show->text().contains('.')))
-    ui->result_show->setText(ui->result_show->text() + ".");
+  ui->result_show->setText(ui->result_show->text() + ".");
 }
 
 void MainWindow::function_button() {
@@ -180,5 +180,3 @@ void MainWindow::x_value_validator() {
   QValidator *validator = new QRegularExpressionValidator(regx, this);
   ui->x_value->setValidator(validator);
 }
-
-

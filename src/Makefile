@@ -1,87 +1,110 @@
+LIB = smartcalc.a
 CC = gcc
-TEST_LIBS = -lcheck
-ifeq ($(shell uname -s), Linux)
-	TEST_LIBS += -lsubunit -lm
-endif
-CFLAGS =  -g -lm
-SOURCES = $(wildcard *.c)
-OBJECTS = $(patsubst %.c, %.o, $(SOURCES))
-VALGRIND_FLAGS_v2 = --log-file="valgrind.txt" --track-origins=yes --trace-children=yes --leak-check=full --leak-resolution=med
-BUILD_DIR = build
+FLAGS = -Wall -Werror -Wextra -std=c11
+CFLAGS = -fprofile-arcs -ftest-coverage
+
+SOURCE_DIR = ./Back
+BUILD_DIR = ../build
+INSTALL_DIR = ./build/SmartCalc
+ARCHIVE_DIR = ../archive
+TEST_DIR = ./Tests
 EXEC = /build/SmartCalc
+
+OS = $(shell uname)
+
+SRC = $(SOURCE_DIR)/*.c
+OBJ = $(SRC: .c=.o)
+
+ifeq ($(OS), Darwin)
+	EXPLORER = open
+	APP = SmartCalc.app
+	GCOV_FLAGS = -lcheck -lm
+	LEAK = CK_FORK=no leaks --atExit -- $(TEST_DIR)/test
+else
+	EXPLORER = xdg-open
+	APP = SmartCalc
+	GCOV_FLAGS = `pkg-config --cflags --libs check`
+	LEAK = valgrind --leak-check=full --leak-resolution=low --quiet --log-file=$(TEST_DIR)/leaks.txt $(TEST_DIR)/test
+endif
 
 all: install open
 
-install:
-	[ -d $(BUILD_DIR) ] || mkdir -p $(BUILD_DIR)
-	cd build && qmake ../Front
-	make -C ./build/
+$(LIB): $(OBJ)
+	rm -f $(BUILD_DIR)/$(LIB)
+	ar rc $@ $(OBJ) 
+	ranlib $@
+	mv $(LIB) $(BUILD_DIR)
+
+%.o: %.c
+	$(CC) $(FLAGS) -c $< -o $@
+
+.PHONY: test
+test:
+#	@checkmk clean_mode=1 $(TEST_DIR)/tests.check > $(TEST_DIR)/test.c
+	@lcov --directory . --zerocounters
+	@rm -f $(TEST_DIR)/test
+	@gcc $(CFLAGS) -g $(SRC) $(TEST_DIR)/test.c -o $(TEST_DIR)/test $(GCOV_FLAGS)
+	@$(TEST_DIR)/test
+
+gcov_report: test
+	@rm -rf $(TEST_DIR)/coverage_results
+	@mkdir $(TEST_DIR)/coverage_results
+	@lcov --directory . --capture -o $(TEST_DIR)/coverage_results/lcov.info
+	@genhtml -o $(TEST_DIR)/coverage_results/ $(TEST_DIR)/coverage_results/lcov.info --highlight --legend --title "SmartCalc_v1.0 project coverage"
+	@rm -f $(TEST_DIR)/*.gc*
+
+install: uninstall
+	@mkdir $(INSTALL_DIR)
+	@cd ./Front && qmake SmartCalc.pro -o ../$(INSTALL_DIR)/Makefile && make -C ../$(INSTALL_DIR)/
+	@chmod +rwx $(INSTALL_DIR)
+	@chmod +rwx $(INSTALL_DIR)/$(APP)
+	@rm -f $(INSTALL_DIR)/*.o
 
 open:
 ifeq ($(shell uname), Linux)
-	.$(EXEC)
+	sudo .$(EXEC)/SmartCalc 
 else
-	open .$(EXEC)
+	open .$(EXEC)/SmartCalc 
 endif
 
-uninstall: clean
-	rm -Rf build/
-	rm -rf ../SmartCalc.tar
-	rm -rf ../SmartCalc.app
+uninstall:
+	rm -rf $(INSTALL_DIR)
 
 dvi:
-	open -a 'google chrome' SmartCalc.html
+	open Manual/readme.md
 
-dist: uninstall clean
-	cd ../../ && tar -czvf SmartCalc.tar src
-
-valgrind: test
-	valgrind $(VALGRIND_FLAGS_v2) ./test
-	grep -n "ERROR SUMMARY" valgrind.txt
-
-test: clean 
-	$(CC) $(CFLAGS) -c calculation.c my_heder.h --coverage -lm
-	$(CC) $(CFLAGS) -c parser.c my_heder.h --coverage -lm
-	$(CC) $(CFLAGS) -c variable_result.c my_heder.h --coverage -lm
-	$(CC) $(CFLAGS) -c help_functions.c my_heder.h --coverage -lm
-	$(CC) $(CFLAGS) -c ./tests/test.c ./tests/s21_test_calc.h --coverage -lm
-	$(CC) $(CFLAGS) -c ./tests/test_qalc.c ./tests/s21_test_calc.h --coverage -lm
-	$(CC) $(CFLAGS) -c my_test.c my_heder.h --coverage -lm
-	$(CC) $(CFLAGS) calculation.o my_test.o parser.o variable_result.o help_functions.o test.o test_qalc.o -o test -lcheck --coverage -lm
-	./test
-	rm -rf *.o tests/*.o
-
-gcov_flag:
-	$(eval CFLAGS += -fprofile-arcs -ftest-coverage)
-
-gcov_report: clean gcov_flag test
-	gcov $(SOURCES)
-	rm -rf test*.gcno test*.gcda test*.gcov
-	gcovr -s --html-details -o coverage.html
-	open coverage.html
-	rm -rf *.gcno *.gcda *.gcov
-	
-style:
-	clang-format --style=google -i *.c *.h
-	clang-format --style=google -i tests/*.c tests/*.h
-
-test_leaks: my_heder.a
-	$(CC) $(CFLAGS) -c calculation.c my_heder.h --coverage 
-	$(CC) $(CFLAGS) -c parser.c my_heder.h --coverage 
-	$(CC) $(CFLAGS) -c variable_result.c my_heder.h --coverage 
-	$(CC) $(CFLAGS) -c help_functions.c my_heder.h --coverage 
-	$(CC) $(CFLAGS) -c ./tests/test.c ./tests/s21_test_calc.h --coverage
-	$(CC) $(CFLAGS) -c ./tests/test_qalc.c ./tests/s21_test_calc.h --coverage
-	$(CC) $(CFLAGS) -c my_test.c my_heder.h --coverage 
-	$(CC) $(CFLAGS) calculation.o my_test.o parser.o variable_result.o help_functions.o test.o test_qalc.o -o test -lcheck --coverage
-ifeq ($(shell uname -s), Linux)
-	rm -rf *.o tests/*.o
-	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./test
-else
-	leaks --atExit -- ./test
-endif
+dist: install
+	rm -rf $(ARCHIVE_DIR)
+	mkdir $(ARCHIVE_DIR)
+	mkdir $(ARCHIVE_DIR)/SmartCalc_v1.0
+	cp -r $(INSTALL_DIR)/$(APP) $(ARCHIVE_DIR)/SmartCalc_v1.0
+	cp -r Manual $(ARCHIVE_DIR)/SmartCalc_v1.0
+	cd $(ARCHIVE_DIR) && tar cvzf Archive_SmartCalc_v1.0.tgz SmartCalc_v1.0 && rm -rf SmartCalc_v1.0
 
 clean:
-	rm -rf *.a *.o tests/*.o tests/*.gch test *.gcno *.gcda *.gcov *.gch *.info coverage* *.dSYM
+	rm -f $(BUILD_DIR)/$(LIB)
+	rm -f $(SOURCE_DIR)/*.o
+	rm -f $(SOURCE_DIR)/*.gc*
+	rm -f $(TEST_DIR)/*.gc*
+	rm -f $(TEST_DIR)/test
+	rm -rf $(TEST_DIR)/coverage_results
+	rm -f $(TEST_DIR)/test.log
+	rm -f $(TEST_DIR)/leaks.txt
+	rm -rf $(BUILD_DIR)/SmartCalc
+	rm -rf $(ARCHIVE_DIR)
+	lcov --directory . --zerocounters
 
-.PHONY: my_heder.a all clean test style
+style:
+	clang-format -n ./Back/*.c
+	clang-format -n ./Back/*.h
+	clang-format -n ./Front/*.cpp 
+	clang-format -n ./Front/*.h
+	clang-format -n ./Tests/*.c
+	clang-format -n ./Tests/*.check
+
+leaks: test
+	rm -f $(TEST_DIR)/leaks.txt
+	$(LEAK)
+	@rm -f $(TEST_DIR)/*.gc*
+
+rebuild: clean install

@@ -13,8 +13,7 @@ void MainWindow::on_plot_graph_clicked() {
 
   if (output == OK) {
     int amount_traits = 0;
-    trait *r_p_n_array =
-        reverse_polish_notation(input_string, &amount_traits);
+    trait *r_p_n_array = reverse_polish_notation(input_string, &amount_traits);
     if (r_p_n_array != nullptr) {
       double x_min = ui->scope_definifion_min->value();
       double x_max = ui->scope_definifion_max->value();
@@ -26,7 +25,7 @@ void MainWindow::on_plot_graph_clicked() {
       for (double x_value = x_min; x_value <= x_max && output == OK;
            x_value += step, ++i) {
         trait *tmp = copy_array(r_p_n_array, amount_traits);
-        output = calculation(tmp, amount_traits,&result,x_value);
+        output = calculation(tmp, amount_traits, &result, x_value);
         if (output == OK) {
           x[i] = x_value;
           y[i] = result;
@@ -85,32 +84,32 @@ void MainWindow::plot_graph(const QVector<double> x, const QVector<double> y) {
 }
 
 void MainWindow::graph_settings(QCustomPlot *customPlot) {
+  customPlot->addGraph();
+  customPlot->graph(0)->setPen(
+      QPen(Qt::blue));  // line color blue for first graph
+  customPlot->graph(0)->setBrush(QBrush(
+      QColor(0, 0, 255, 20)));  // graph will be filled with translucent blue
 
-    customPlot->addGraph();
-    customPlot->graph(0)->setPen(
-        QPen(Qt::blue));  // line color blue for first graph
-    customPlot->graph(0)->setBrush(QBrush(QColor(
-        0, 0, 255, 20)));  // graph will be filled with translucent blue
+  // configure right and top axis to show ticks but no labels:
+  // (see QCPAxisRect::setupFullAxesBox for a quicker method to do this)
+  customPlot->xAxis2->setVisible(true);
+  customPlot->xAxis2->setTickLabels(false);
+  customPlot->yAxis2->setVisible(true);
+  customPlot->yAxis2->setTickLabels(false);
 
-    // configure right and top axis to show ticks but no labels:
-    // (see QCPAxisRect::setupFullAxesBox for a quicker method to do this)
-    customPlot->xAxis2->setVisible(true);
-    customPlot->xAxis2->setTickLabels(false);
-    customPlot->yAxis2->setVisible(true);
-    customPlot->yAxis2->setTickLabels(false);
+  // make left and bottom axes always transfer their ranges to right and top
+  // axes:
+  connect(customPlot->xAxis, SIGNAL(rangeChanged(QCPRange)), customPlot->xAxis2,
+          SLOT(setRange(QCPRange)));
+  connect(customPlot->yAxis, SIGNAL(rangeChanged(QCPRange)), customPlot->yAxis2,
+          SLOT(setRange(QCPRange)));
 
-    // make left and bottom axes always transfer their ranges to right and top axes:
-    connect(customPlot->xAxis, SIGNAL(rangeChanged(QCPRange)), customPlot->xAxis2,
-            SLOT(setRange(QCPRange)));
-    connect(customPlot->yAxis, SIGNAL(rangeChanged(QCPRange)), customPlot->yAxis2,
-            SLOT(setRange(QCPRange)));
+  // let the ranges scale themselves so graph 0 fits perfectly in the visible
+  // area:
+  customPlot->graph(0)->rescaleAxes();
 
-    // let the ranges scale themselves so graph 0 fits perfectly in the visible area:
-    customPlot->graph(0)->rescaleAxes();
-
-    // Allow user to drag axis ranges with mouse, zoom with mouse wheel and select
-    // graphs by clicking:
-    customPlot->setInteractions(QCP::iRangeDrag | QCP::iRangeZoom |
-                                QCP::iSelectPlottables);
-  }
-
+  // Allow user to drag axis ranges with mouse, zoom with mouse wheel and select
+  // graphs by clicking:
+  customPlot->setInteractions(QCP::iRangeDrag | QCP::iRangeZoom |
+                              QCP::iSelectPlottables);
+}

@@ -78,19 +78,17 @@ class MainWindow : public QMainWindow {
   void get_next_date_refill_or_withdraw(QDate *date, const int type);
   QDate get_next_date_payment(QDate date_payment);
   void on_pushButton_calculate_deposit_clicked();
-  void add_refill(double *deposit_sum,
-                                     QDate *refill_date);
+  void add_refill(double *deposit_sum, QDate *refill_date);
   void sub_withdrawal(double *deposit_sum, QDate *withdrawal_date);
   void add_sum_year_procent(double *sum_procent_of_year,
-                                           double *sum_procent_of_period);
+                            double *sum_procent_of_period);
   void procent_calculation(const double deposit_sum, const QDate date,
-                                       double *sum_procent_of_period,
-                                       double *total_sum_procent);
+                           double *sum_procent_of_period,
+                           double *total_sum_procent);
   void tax_calculation(double *sum_tax, double *sum_procent_of_year);
-  void set_deposit_result(const double total_sum_procent,
-                                      const double sum_tax,
-                                      const double deposit_sum);
-    void set_today_date();
-    void deposit_calc_validator();
+  void set_deposit_result(const double total_sum_procent, const double sum_tax,
+                          const double deposit_sum);
+  void set_today_date();
+  void deposit_calc_validator();
 };
 #endif  // MAINWINDOW_H
