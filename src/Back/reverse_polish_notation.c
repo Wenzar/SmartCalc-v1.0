@@ -158,7 +158,7 @@ void get_name_operators(char **pointer, char *name_operator) {
 /// @return статус лексемы int
 int get_status(char symbol) {
   int status = -1;
-  if (symbol == 'p' || symbol == 'x' || symbol == 'e') {
+  if (symbol == 'x') {
     status = e_special_number_status;
   } else if (symbol == 'm') {
     status = e_operator_status;
